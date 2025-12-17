@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Website Name | Home</title>
+    
+    <!-- Google Fonts for aesthetics -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+
+    <!-- Your Custom Stylesheet -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header class="site-header">
+    <div class="header-content">
+        <a href ="{{ url_for('home') }}" class="logo">
+            <img src="{{ url_for('static', filename='DOD logo.png') }}" alt="CMMD Logo" class="logo-icon">
+        <h1>ARMOR</h1>          
+        </a><br><h1>|</h1><br>
+        <a href ="{{ url_for('ETI_HOME') }}" class="logo">
+        <h1>ETI</h1>
+        </a>
+        <nav class="nav-menu">
+            <a href="{{ url_for('home') }}">Home</a>
+            <a href="{{ url_for('CMMD_risk_choice') }}">ARMOR</a>
+            <a href="{{ url_for('ARMOR_QUER') }}">ARMOR ANALYSIS</a>
+            <a href="{{ url_for('ARMOR_QUER_RESEARCH') }}">ARMOR ANALYSIS(RESEARCHER)</a>
+            <a href="{{ url_for('about') }}">About</a>
+            <a href="{{ url_for('projects') }}">Projects</a>
+            </nav>
+    </div>
+</header>   <!-- Preloader -->
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: #121212;
+    }
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: #121212;
+    }
+
+    header.site-header {
+      background: #1f1f1f;
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    header .logo {
+      display: flex;
+      align-items: center;
+      color: #e1da0c;
+      text-decoration: none;
+    }
+
+    header .logo img {
+      height: 40px;
+      margin-right: 1rem;
+    }
+
+    nav.nav-menu a {
+      margin-left: 1rem;
+      color: white;
+      text-decoration: none;
+    }
+
+    .chat-interface {
+      max-width: 800px;
+      margin: 3rem auto;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      padding: 1rem;
+      border-radius: 8px;
+      background-color: #282828;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .chat-box {
+        flex-direction: column;
+        align-items:center;
+        justify-items: center;
+      border: 1px solid #ddd;
+      padding: 1rem;
+      height: auto;
+      background: #f5f8fa;
+      border-radius: 6px;
+      margin-bottom: 1rem;
+    }
+
+    .message {
+      margin-bottom: 1rem;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .bot {
+      align-self: flex-start;
+      background-color: #e8eaf6;
+      color: #1a237e;
+      padding: 0.6rem 1rem;
+      border-radius: 18px 18px 18px 0;
+      max-width: 75%;
+      word-wrap: break-word;
+    }
+
+    h2 {
+      color: #e1da0c;
+      font-family: "Trebuchet MS", sans-serif;
+      font-size: 30px;
+      margin-bottom: 13px;
+    }
+
+    label {
+      color:rgb(0, 0, 0);
+      font-family: "Trebuchet MS", sans-serif, bold;
+      font-size: 25px;
+      margin-bottom: 0px;
+    }
+  button{
+        padding: 0.7rem 1.2rem;
+  font-size: 1rem;
+  background-color:rgb(27, 129, 239);
+  border: none;
+  color: rgb(0, 0, 0);
+  top: 30px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+    }
+button:hover{
+      background-color: #0056b3;
+    }
+    .cmmd-btn.disabled,
+    .cmmd-btn[disabled] {
+  background-color: #444 !important;
+  color: #999 !important;
+  cursor: not-allowed;
+  pointer-events: none;
+  opacity: 0.6;
+}
+.header-column{
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+/* Header */
+.site-header {
+  background: #1a1a1a;
+  padding: 1rem;
+  box-shadow: 0 2px 6px rgb(225, 218, 11);
+}
+.site-header .header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.site-header .logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+.site-header .logo-icon {
+  height: 40px;
+  margin-right: 0.75rem;
+}
+.site-header h1 {
+  font-family: 'Playfair Display', serif;
+  color: #e1da0c;
+  font-size: 1.75rem;
+}
+.nav-menu1 a {
+    margin-left: 2rem;
+    text-decoration: none;
+    font-family: 'Trebuchet MS', sans-serif;
+    color:rgb(205, 214, 25);
+    font-weight: 400;
+    transition: color 0.3s ease;
+}
+
+.nav-menu1 a:hover {
+    color: #0056b3;
+}
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <a href="{{ url_for('home') }}" class="logo">
+      <img src="{{ url_for('static', filename='DOD logo.png') }}" alt="Logo">
+      <h1>ARMOR</h1>
+    </a>
+        <nav class="nav-menu1">
+            <a href="{{ url_for('home') }}">Home</a>
+            <a href="{{ url_for('CMMD_risk_choice') }}">ARMOR</a>
+            <a href="{{ url_for('ARMOR_QUER') }}">ARMOR ANALYSIS</a>
+            <a href="{{ url_for('ARMOR_QUER_RESEARCH') }}">ARMOR ANALYSIS(RESEARCHER)</a>
+            <a href="{{ url_for('about') }}">About</a>
+            <a href="{{ url_for('projects') }}">Projects</a>
+            </nav>
+  </header>
+
+  <main class="chat-interface">
+    <h2>ARMOR RISK SUMMARY</h2>
+    <div class="chat-box">
+      <div class="message bot"><strong>Severity Score(s):</strong> {{ SEVERITY_SCORE }}</div>
+      <div class="message bot"><strong>Probability Score(s):</strong> {{ RISK_SCORE }}</div>
+      <div class="message bot"><strong>Single Probability Score(s):</strong> {{ SINGLE_RISK_SCORE }}</div>
+      <div class="message bot"><strong>Final Risk Level:</strong> {{ FINAL_RISK_LEVEL }}</div>
+
+      <label>CHOICES:</label><br><br>
+      {% if isMissImageAvailable %}
+        <a href="{{ url_for('CMMD_RISK_RESP') }}"><button type="button" class="cmmd-btn">CMMD</button></a>
+      {% else %}
+        <button type="button" class="cmmd-btn disabled" disabled>CMMD (Image Required)</button>
+      {% endif %}
+      <a href="#"><button type="button">LLM (Large Language Model)</button></a>
+    </div>
+  </main>
+</body>
+</html>

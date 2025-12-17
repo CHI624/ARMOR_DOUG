@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Website Name | Home</title>
+    
+    <!-- Google Fonts for aesthetics -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+
+    <!-- Your Custom Stylesheet -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header class="site-header">
+    <div class="header-content">
+        <a href ="{{ url_for('home') }}" class="logo">
+            <img src="{{ url_for('static', filename='DOD logo.png') }}" alt="CMMD Logo" class="logo-icon">
+        <h1>ARMOR</h1>          
+        </a><br><h1>|</h1><br>
+        <a href ="{{ url_for('ETI_HOME') }}" class="logo">
+        <h1>ETI</h1>
+        </a>
+        <nav class="nav-menu">
+            <a href="{{ url_for('home') }}">Home</a>
+            <a href="{{ url_for('CMMD_risk_choice') }}">ARMOR</a>
+            <a href="{{ url_for('ARMOR_QUER') }}">ARMOR ANALYSIS</a>
+            <a href="{{ url_for('ARMOR_QUER_RESEARCH') }}">ARMOR ANALYSIS(RESEARCHER)</a>
+            <a href="{{ url_for('about') }}">About</a>
+            <a href="{{ url_for('projects') }}">Projects</a>
+            </nav>
+    </div>
+</header>   <!-- Preloader -->
+<style>
+    /* Base reset and typography */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: 'Poppins', sans-serif;
+  background: #282828;
+  color: #333;
+  line-height: 1.5;
+}
+.nav-menu1 a {
+    margin-left: 2rem;
+    text-decoration: none;
+    font-family: 'Trebuchet MS', sans-serif;
+    color:rgb(205, 214, 25);
+    font-weight: 400;
+    transition: color 0.3s ease;
+}
+
+.nav-menu1 a:hover {
+    color: var(--accent-color);
+}
+/* Header */
+.site-header {
+  background: #1a1a1a;
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 6px rgb(225, 218, 11);
+}
+.site-header .header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.site-header .logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+.site-header .logo-icon {
+  height: 40px;
+  margin-right: 0.75rem;
+}
+.site-header h1 {
+  font-family: 'Playfair Display', serif;
+  color: #e1da0c;
+  font-size: 1.75rem;
+}
+.next-button {
+  color: #ddd;
+  margin-left: 1.5rem;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+.next-button :hover {
+  color: #e1da0c;
+}
+
+/* Chat interface container */
+.chat-interface {
+  margin-top: 90px;
+  max-width: 800px;
+  margin: 2rem auto;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  padding: 1.5rem;
+}
+.chat-interface h2 {
+  font-family: 'Playfair Display', serif;
+  color: #1a1a1a;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+/* Chat box styling */
+.chat-box {
+  margin-top: 20px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  height: 400px;
+  padding: 1rem;
+  overflow-y: auto;
+  background:rgb(255, 255, 255);
+}
+.chat-box .message {
+  margin-bottom: 1rem;
+  display: flex;
+}
+main.chat-interface {
+  margin-top: 4rem;
+  background-color:rgb(163, 163, 163);
+}
+main.chat-interface h2{
+  color:rgb(255, 255, 255);
+}
+.chat-box .user,
+.chat-box .bot {
+  display: inline-block;
+  padding: 0.6rem 1rem;
+  border-radius: 18px;
+  max-width: 75%;
+  word-wrap: break-word;
+}
+
+.chat-box .user {
+  align-self: flex-end;
+  background:rgb(13, 163, 232);
+  color: #003c8f;
+  border-top-right-radius: 0;
+}
+.chat-box .bot {
+  align-self: flex-start;
+  background: #e8eaf6;
+  color: #1a237e;
+  border-top-left-radius: 0;
+}
+
+/* Utility */
+.hidden {
+  display: none !important;
+}
+#button {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 12px 24px;
+  background-color: #1e3a8a; /* Navy blue */
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  transition: background-color 0.3s ease;
+}
+
+#button:hover {
+  background-color: #3b82f6; /* Lighter blue on hover */
+}
+.S_3{
+  color:rgb(255, 255, 255);
+  font-family: "Playfair Display", sans-serif, bold;
+  font-size: 25px;
+  bottom: -15px;
+}
+.Rec_Con {
+  color:rgb(255, 255, 255);
+  font-family: "Playfair Display", sans-serif, bold;
+  font-size: 25px;
+  margin-bottom: 10px;
+}
+</style>
+<main class="chat-interface">
+  <h2>ARMOR Risk Report</h2>
+
+  <div style="background:rgb(117, 117, 117); color: #f0f0f0; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+    <p><strong>Severity Score:</strong> {{ SEVERITY_SCORE }}</p>
+    <p><strong>Risk Score:</strong> {{ RISK_SCORE }}</p>
+    <p><strong>Final Risk Level:</strong> {{ FINAL_RISK_LEVEL }}</p>
+  </div>
+  <h2 class="S_3">STEP 3:</h2>
+  <h3 class="Rec_Con">Recommended Controls</h3>
+  <div id="chat-box" class="chat-box"></div>
+  <a href="{{url_for('thankyou') }}"id="button">NEXT</a>
+</main>
+
+<script>
+const prompt = //<?php echo json_encode($prompt); ?>;
+
+window.addEventListener('DOMContentLoaded', async () => {
+  const chatBox = document.getElementById('chat-box');
+  const nextButton = document.getElementById('next-button');
+  let redirectURL = null; // Store redirect here
+
+  const addMessage = (sender, text) => {
+    const msg = document.createElement('div');
+    msg.className = 'message';
+    msg.innerHTML = `<span class="${sender === 'You' ? 'user' : 'bot'}">${sender}:</span> ${text}`;
+    chatBox.appendChild(msg);
+    chatBox.scrollTop = chatBox.scrollHeight;
+  };
+
+  addMessage('ARMOR', 'Analyzing your mission data...');
+
+  const response = await fetch('{{ url_for("llm_proxy") }}', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ prompt })
+  });
+
+  const data = await response.json();
+  const reply = data.reply || 'No response received.';
+  const formattedReply = (reply || 'No response received.').replace(/\n/g, '<br/>');
+  addMessage('ARMOR', formattedReply);
+
+  const dbResponse = await fetch('ARMOR_COND.php', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ response: reply })
+  });
+
+  const dbData = await dbResponse.json();
+
+  if (dbData.status === 'success' && dbData.redirect) {
+    redirectURL = dbData.redirect;
+    nextButton.style.display = 'inline-block'; // Show the button
+  } else {
+    console.error('DB submission failed or redirect missing:', dbData);
+  }
+
+  nextButton.addEventListener('click', () => {
+    if (redirectURL) {
+      window.location.href = redirectURL;
+    }
+  });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ARMOR | Home</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400&display=swap" rel="stylesheet"/>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      height: 100%;
+      font-family: 'Poppins', sans-serif;
+      scroll-behavior: smooth;
+      background: black;
+      z-index: 1;
+    }
+
+    /* INTRO SECTION */
+    .intro {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background: linear-gradient(135deg, #004a99, #007aff);
+      color: white;
+      text-align: center;
+      position: relative;
+      transition: opacity 5s ease, transform 5s ease;
+      z-index: 1;
+    }
+
+
+    .intro h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      margin-bottom: 0.5rem;
+      opacity: 0;
+      animation: fadeIn 2s 1.5s forwards;
+      z-index: 1;
+    }
+
+    .intro p {
+      font-size: 1.2rem;
+      opacity: 0;
+      animation: fadeIn 2s 1.5s forwards;
+    }
+    .intro video{
+      opacity: 13;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: translate(-50%, -50%);
+      z-index: -1;
+    }
+    .intro .intro-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.706); /* Adjust opacity as needed */
+  z-index: -1;
+}
+.intro.fade-out {
+      opacity: 0;
+  transform: translateY(-50px);
+  pointer-events: none;
+  position: absolute;
+  height: 0;
+  overflow: hidden;
+    }
+    .down-arrow {
+      margin-top: 2rem;
+      font-size: 2rem;
+      cursor: pointer;
+      opacity: 0;
+      animation: fadeIn 2s 2s forwards;
+      transition: transform 0.3s;
+    }
+
+    .down-arrow:hover {
+      transform: translateY(5px);
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    /* FIXED HEADER */
+    .site-header {
+      opacity: 0;
+      transform: translateY(-30px);
+      transition: opacity 1s ease, transform 1s ease;
+      background: linear-gradient(135deg,#004a99,#007aff);
+      color: #fff;
+      clip-path: polygon(0 0,100% 0,100% 75%,0 100%);
+      width: 100%;
+      z-index: 999;
+    }
+
+    .site-header.visible {
+      opacity: 1;
+      transform: translateY(0);
+      position: fixed;
+      top: 0;
+      left: 0;
+    }
+
+    .site-header .header-content {
+      max-width: 1200px; margin: auto; padding: 2rem;
+      display: flex; align-items:center; justify-content:space-between;
+    }
+
+    .site-header .logo {
+      display:flex; align-items:center; text-decoration:none; color:#fff;
+    }
+
+    .site-header .logo-icon { height:50px; margin-right:1rem; }
+
+    .site-header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size:2.5rem; letter-spacing:2px;
+    }
+
+    .site-header .nav-menu a {
+      margin-left:1.5rem; text-decoration:none; color:#fff;
+      font-weight:500; position:relative;
+    }
+
+    .site-header .nav-menu a::after {
+      content:''; display:block; height:2px; background:#fff;
+      width:0; transition:width .3s;
+      position:absolute; bottom:-4px; left:0;
+    }
+
+    .site-header .nav-menu a:hover::after { width:100%; }
+
+    /* Spacer to avoid header overlap */
+    .header-spacer {
+      height: 130px;
+      display: none;
+    }
+.site-header.static {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+    /* CMMD SECTION */
+    .cmmd-section {
+      position: relative;
+      height: 100%;
+      overflow-x: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      color: white;
+      z-index: 1;
+    }
+
+    .cmmd-section video {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: translate(-50%, -50%);
+      z-index: -1;
+    }
+
+    .cmmd-section h2 {
+      font-size: 20px;
+      font-family: 'Futura', serif;
+      justify-self: center;
+      margin-bottom: 1rem;
+      z-index: 1;
+    }
+
+    .cmmd-section button {
+      padding: 1rem 2rem;
+      font-size: 1.2rem;
+      background-color: rgba(5, 157, 222, 0.949);
+      border: none;
+      border-radius: 8px;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s;
+      z-index: 1;
+    }
+
+    .cmmd-section button:hover {
+      background-color: rgba(4, 41, 128, 0.8);
+    }
+    .cmmd-section .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Adjust opacity as needed */
+  z-index: 0;
+}
+.cmmd-content{
+  background-color: rgba(10, 118, 206, 0.671);
+  padding: 20px;
+  bottom: 21px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+    /* CMMD SECTION */
+    .cmmd-section1 {
+      position: relative;
+      height: 100%;
+      overflow-x: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      color: white;
+      z-index: 1;
+    }
+
+    .cmmd-section1 video {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: translate(-50%, -50%);
+      z-index: -1;
+    }
+
+    .cmmd-section1 h2 {
+      font-size: 20px;
+      font-family: 'Futura', serif;
+      justify-self: center;
+      margin-bottom: 1rem;
+      z-index: 1;
+    }
+
+    .cmmd-section1 button {
+      padding: 1rem 2rem;
+      font-size: 1.2rem;
+      background-color: rgba(5, 157, 222, 0.949);
+      border: none;
+      border-radius: 8px;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s;
+      z-index: 1;
+    }
+
+    .cmmd-section1 button:hover {
+      background-color: rgba(4, 41, 128, 0.8);
+    }
+    .cmmd-section1 .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.569); /* Adjust opacity as needed */
+  z-index: 0;
+}
+.cmmd-content{
+  background-color: rgba(10, 118, 206, 0.671);
+  padding: 20px;
+  bottom: 0px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+.ARMOR-content{
+  background-color: rgba(10, 118, 206, 0.671);
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+.scroll-down-arrow {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    bottom: 20px;
+    height: 40px;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    animation: bounce 2s infinite ease-in-out;
+    z-index: 1;
+}
+
+.scroll-down-arrow svg {
+    stroke: #fff;
+    transition: stroke 0.3s ease;
+        z-index: 1;
+
+}
+
+.scroll-down-arrow:hover {
+    background-color: var(--primary-text-color);
+    border-color: var(--primary-text-color);
+    animation-play-state: paused; /* Pause animation on hover */
+        z-index: 1;
+
+}
+
+.scroll-down-arrow:hover svg {
+    stroke: var(--background-color);
+        z-index: 1;
+}
+.scroll-down-arrow1 {
+    position: absolute;
+    margin-top: 640px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 40px;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    animation: bounce 2s infinite ease-in-out;
+    z-index: 2;
+
+}
+
+.scroll-down-arrow1 svg {
+    stroke: #fff;
+    transition: stroke 0.3s ease;
+        z-index: 2;
+
+}
+
+.scroll-down-arrow1:hover {
+    background-color: var(--primary-text-color);
+    border-color: var(--primary-text-color);
+    animation-play-state: paused; /* Pause animation on hover */
+        z-index: 2;
+
+}
+
+.scroll-down-arrow1:hover svg {
+    stroke: var(--background-color);
+        z-index: 2;
+}
+.scroll-down-arrow1.fade-in {
+  opacity: 1;
+  pointer-events: auto;
+  transition: opacity 1s ease;
+  z-index: 1;
+}
+.scroll-down-arrow.fade-in {
+  opacity: 1;
+  pointer-events: auto;
+  transition: opacity 1s ease;
+  z-index: 1;
+}
+
+.ARMOR-section {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.ARMOR-section video {
+  position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: translate(-50%, -50%);
+      z-index: -1;
+}
+
+.ARMOR-section .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(0,0,0,0.5);
+  z-index: 0;
+}
+
+.ARMOR-content {
+  z-index: 2;
+  text-align: center;
+  color: white;
+}
+
+.ARMOR-content h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.ARMOR-content button {
+  padding: 1rem 2rem;
+  font-size: 1.25rem;
+  background: rgba(5, 157, 222, 0.949);
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.ARMOR-content button:hover {
+  background: rgba(4, 41, 128, 0.8);
+}
+.intro.locked {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  z-index: 10;
+  overflow: hidden;
+}
+body.lock-scroll {
+  overflow: hidden;
+}
+.scroll-up-arrow {
+  position: absolute;
+  bottom: 30px;
+  width: 40px;
+  height: 40px;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+  animation: bounce 2s infinite ease-in-out;
+  z-index: 9;
+}
+
+.scroll-up-arrow svg {
+  stroke: #fff;
+  transition: stroke 0.3s ease;
+}
+
+.scroll-up-arrow:hover {
+  background-color: var(--primary-text-color);
+  border-color: var(--primary-text-color);
+  animation-play-state: paused;
+}
+
+.scroll-up-arrow:hover svg {
+  stroke: var(--background-color);
+}
+.CORES-content{
+  background-color: rgba(10, 118, 206, 0.671);
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+.CORES-content {
+  z-index: 2;
+  text-align: center;
+  color: white;
+}
+
+.CORES-content h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.CORES-content button {
+  padding: 1rem 2rem;
+  font-size: 1.25rem;
+  background: rgba(5, 157, 222, 0.949);
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.CORES-content button:hover {
+  background: rgba(4, 41, 128, 0.8);
+}
+.Core_S {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.Core_S video {
+  position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: translate(-50%, -50%);
+      z-index: -1;
+}
+
+.Core_S .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(0,0,0,0.5);
+  z-index: 0;
+}
+.intro.locked {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  z-index: 10;
+  overflow: hidden;
+}
+  </style>
+</head>
+<body clas="lock-scroll">
+  <!-- Initial Header (hidden initially) -->
+  <header class="site-header static">
+    <div class="header-content">
+      <a href="{{ url_for('ETI_INFO_PAGE')}}" class="logo">
+        <img src="{{ url_for('static', filename= 'DOD logo.png') }}" alt="CMMD Logo" class="logo-icon">
+        <h1>ETI(Enhanced Technical Inferencing)</h1>
+      </a>
+      <nav class="nav-menu">
+        <a href="{{ url_for('ARMOR_HOME')}}">Home</a>
+        <a href="{{ url_for('ETI_INFO_PAGE')}}">ETI HOME</a>
+        <a href="{{ url_for('home')}}">ARMOR</a>
+        <a href="{{ url_for('ARMOR_QUER')}}">CMMD</a>
+        <a href="{{ url_for('about')}}">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Intro Section -->
+  
+<section id="intro" class="intro locked">
+    <h1>ETI</h1>
+    
+    <p>Enhanced Technical Inferencing Software</p>
+    
+    <video autoplay muted loop playsinline>
+    <source src="{{ url_for('static', filename='ETI_ATAK.mp4') }}" type="video/mp4"></source>
+          Your browser does not support the video tag.
+        </video>
+        <div class="intro-overlay"></div>
+    <div class="down-arrow" onclick="transitionHeader()">⬇</div>
+  </section>
+
+  <!-- Final Header (initially hidden) -->
+  <header id="finalHeader" class="site-header">
+    <div class="header-content">
+      <a href="{{ url_for('ETI_HOME') }}" class="logo">
+        <img src="{{ url_for('static', filename='DOD logo.png') }}" alt="CMMD Logo" class="logo-icon">
+        <h1>ETI(Enhanced Technical Inferencing)</h1>
+      </a>
+      <nav class="nav-menu">
+        <a href="{{ url_for('ETI_HOME') }}">Home</a>
+        <a href="{{ url_for('home') }}">ARMOR</a>
+        <a href="http://127.0.0.1:5000">CMMD</a>        
+        <a href="http://127.0.0.1:8051/">C^2ORES</a>
+        <a href="{{ url_for('ETI_INFO_PAGE')}}">ETI HOME</a>
+        <a href="{{ url_for('about') }}">About</a>
+      </nav>
+    </div>
+  </header>
+    <div id="spacer" class="header-spacer"></div>
+    <section class="cmmd-section" id="cmmd" display="none">
+          <video autoplay muted loop playsinline>
+    <source src="{{ url_for('static', filename='CMMD-Demo-2minutes.mp4')}}" type="video/mp4"></source>
+          Your browser does not support the video tag.
+        </video>
+        <div class="overlay"></div>
+    <div class="cmmd-content">
+    <h2>CRISIS MITIGATION MUNICIPAL DEVICE(CMMD)</h2>
+    <a href="http://127.0.0.1:5000/"><button>Launch CMMD</button></a>
+    </div>
+  </section>
+    <a id="scroll-down-arrow" href="#cmmd_s1" class="scroll-down-arrow" aria-label="Scroll to next section">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="6 9 12 15 18 9"></polyline>
+  </svg>
+</a>
+
+<section class="cmmd-section1" id="cmmd_s1" display="none">
+          <video autoplay muted loop playsinline>
+    <source src="{{ url_for('static', filename='Sequence 01_5.mp4') }}" type="video/mp4"></source>
+          Your browser does not support the video tag.
+        </video>
+        <div class="overlay"></div>
+        <div id="spacer" class="hs"></div>
+    <div class="cmmd-content">
+    <h2>ETI RESPONSE</h2>
+    <a href="http://0.0.0.0:8050/"><button>Launch ETI RESPONSE</button></a>
+    </div>
+    <a id="scroll-down-arrow1" href="#Core_S" class="scroll-down-arrow1" aria-label="Scroll to next section">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="6 9 12 15 18 9"></polyline>
+  </svg>
+</a>
+  </section>
+  <section class="Core_S" id="Core_S" display="none">
+          <video autoplay muted loop playinline>
+    <source src="{{ url_for('static', filename='Sequence 01_9.mp4')}}" type="video/mp4"></source>
+          Your browser does not support the video tag.
+        </video>
+        <div class="overlay"></div>
+        <div id="spacer" class="hs"></div>
+    <div class="CORES-content">
+    <h2>C^2ORES</h2>
+    <a href="http://127.0.0.1:8051/"><button>Launch C^2ORES</button></a>
+    </div>
+    <a id="scroll-down-arrow1" href="#ARMOR-section" class="scroll-down-arrow1" aria-label="Scroll to next section">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="6 9 12 15 18 9"></polyline>
+  </svg>
+</a>
+  </section>
+
+    <section class="ARMOR-section" id="ARMOR-section" class="header-spacer">
+<video autoplay muted loop playsinline>
+    <source src="{{ url_for('static', filename='military.mp4')}}" type="video/mp4"></source>
+          Your browser does not support the video tag.
+        </video>      
+        <div class="overlay"></div>
+       <div class="ARMOR-content">
+    <h2>ARMOR</h2>
+    <a href="{{ url_for('home')}}"><button>Launch ARMOR</button></a>
+    </div>
+    <script>
+      document.getElementById("scroll-up-arrow").addEventListener("click", function(e) {
+  e.preventDefault();
+  document.getElementById("spacer").scrollIntoView({ behavior: "smooth" });
+});
+    </script>
+    <a id="scroll-up-arrow" href="#spacer" class="scroll-up-arrow" aria-label="Scroll to top">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="18 15 12 9 6 15"></polyline>
+  </svg>
+</a>
+    </section>
+   <script>
+    function transitionHeader() {
+      const intro = document.getElementById('intro');
+      const header = document.getElementById('finalHeader');
+      const spacer = document.getElementById('spacer');
+        const scrollArrow = document.getElementById('scroll-down-arrow');
+
+      intro.classList.add('fade-out');
+
+     setTimeout(() => {
+    intro.classList.remove('locked'); // ✅ Unlock scroll
+    intro.style.display = 'none'; // Optional: remove from layout if needed
+
+    // Show header and arrow
+    header.classList.add('visible');
+    spacer.style.display = 'block';
+    scrollArrow.classList.add('fade-in');
+
+    // Scroll to CMMD section
+    document.getElementById('cmmd').scrollIntoView({ behavior: 'smooth' });
+    document.body.classList.remove('lock-scroll');
+
+    // Scroll to CMMD section
+    document.getElementById('cmmd').scrollIntoView({ behavior: 'smooth' });
+  }, 300);
+}
+
+  </script>
+
+</body>
+</html>
+

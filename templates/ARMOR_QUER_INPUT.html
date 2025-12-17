@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Website Name | Home</title>
+    
+    <!-- Google Fonts for aesthetics -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+
+    <!-- Your Custom Stylesheet -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header class="site-header">
+    <div class="header-content">
+        <a href ="{{ url_for('home') }}" class="logo">
+            <img src="{{ url_for('static', filename='DOD logo.png') }}" alt="CMMD Logo" class="logo-icon">
+        <h1>ARMOR</h1>          
+        </a><br><h1>|</h1><br>
+        <a href ="{{ url_for('ETI_HOME') }}" class="logo">
+        <h1>ETI</h1>
+        </a>
+        <nav class="nav-menu">
+            <a href="{{ url_for('home') }}">Home</a>
+            <a href="{{ url_for('CMMD_risk_choice') }}">ARMOR</a>
+            <a href="{{ url_for('ARMOR_QUER') }}">ARMOR ANALYSIS</a>
+            <a href="{{ url_for('ARMOR_QUER_RESEARCH') }}">ARMOR ANALYSIS(RESEARCHER)</a>
+            <a href="{{ url_for('about') }}">About</a>
+            <a href="{{ url_for('projects') }}">Projects</a>
+            </nav>
+    </div>
+</header>   <!-- Preloader -->
+<body>
+    <!-- Preloader -->
+<div id="preloader">
+  <div class="loader-text">Loading...</div>
+</div>
+<style>
+/* --- PRELOADER FOR INITIAL PAGE LOAD --- */
+#preloader {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  background: #1a1a1a;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.loader-text {
+  color: #e1da0c;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.5rem;
+}
+
+/* --- CHAT INTERFACE STYLES --- */
+.chat-interface {
+  max-width: 800px;
+  margin: 3rem auto;
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 1rem;
+  border-radius: 8px;
+  background-color: #282828;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.chat-box {
+  border: 1px solid #444;
+  padding: 1rem;
+  height: 400px;
+  overflow-y: auto;
+  background: #f5f8fa;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.message {
+  display: flex;
+  flex-direction: column;
+  max-width: 90%;
+  word-wrap: break-word;
+}
+
+.message .sender {
+    font-weight: bold;
+    margin-bottom: 0.3rem;
+    font-size: 0.9em;
+}
+
+.message-content {
+    padding: 0.6rem 1rem;
+    border-radius: 18px;
+}
+
+/* User Message */
+.user {
+  align-self: flex-end;
+}
+.user .sender { color: #003c8f; text-align: right; }
+.user .message-content {
+  background-color: #e1f5fe;
+  color: #01579b;
+  border-radius: 18px 18px 0 18px;
+}
+
+/* Bot Message */
+.bot {
+  align-self: flex-start;
+}
+.bot .sender { color: #1a237e; }
+.bot .message-content {
+  background-color: #e8eaf6;
+  color: #1a237e;
+  border-radius: 18px 18px 18px 0;
+}
+
+/* LLM Response (pre-formatted) */
+.llm-response {
+  white-space: pre-wrap;
+  background-color: transparent; /* Inherits from parent */
+  padding: 0;
+  border-radius: 6px;
+  font-family: monospace;
+  font-size: 15px;
+  margin-top: 0;
+}
+
+/* System Message */
+.system {
+    align-self: center;
+    width: 100%;
+    text-align: center;
+}
+.system .message-content {
+    background-color: #fff8e1;
+    color: #6d4c41;
+    font-style: italic;
+    font-size: 0.9em;
+    display: inline-block;
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+}
+
+/* Typing Indicator */
+.typing-indicator {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding-top: 5px; /* Spacing */
+}
+.typing-indicator span {
+  font-style: italic;
+  color: #555;
+}
+.typing-indicator .dot {
+  width: 8px;
+  height: 8px;
+  background-color: #888;
+  border-radius: 50%;
+  animation: pulse 1.4s infinite;
+}
+.typing-indicator .dot:nth-child(2) { animation-delay: 0.2s; }
+.typing-indicator .dot:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.2; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1); }
+}
+
+/* --- FORM STYLES --- */
+#chat-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 10px;
+}
+#user-input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #bbb;
+  border-radius: 6px;
+  font-size: 1rem;
+  outline: none;
+  transition: border 0.2s ease;
+  width: 100%;
+  box-sizing: border-box; /* Important */
+}
+#user-input:focus {
+  border-color: #007BFF;
+}
+
+#chat-form button {
+  padding: 0.7rem 1.2rem;
+  font-size: 1rem;
+  background-color: #e1da0c;
+  border: none;
+  color: rgb(0, 0, 0);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+#chat-form button:hover:not(:disabled) {
+  background-color: #c7bf0b;
+}
+#chat-form button:disabled {
+    background-color: #aaa;
+    cursor: not-allowed;
+}
+
+/* --- OTHER STYLES --- */
+h2 {
+  color: #e1da0c;
+  font-family: "Trebuchet MS", sans-serif;
+  font-size: 30px;
+  margin-bottom: 13px;
+}
+label {
+  color: #e1da0c;
+  font-family: "Trebuchet MS", sans-serif;
+  font-size: 15px;
+  margin-bottom: 13px;
+}
+body {
+    background-image: url("{{ url_for('static', filename='CMMD_wall_home.png') }}");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+</style>
+<main class="chat-interface">
+  <div id="notice" style="
+  background: #fff8c6;
+  border: 1px solid #ffe066;
+  color: #856404;
+  padding: 0.75rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+">
+  ⚠️ You can only ask up to <strong>2 queries</strong> in this session.
+</div>
+<h2>ARMOR ANALYSIS</h2>
+  <div id="chat-box" class="chat-box"></div>
+<label>Query Input:</label>
+  <form id="chat-form">
+    <input type="text" id="user-input" placeholder="Ask ARMOR anything..." autocomplete="off" required /><br></br>
+    <a href="{{ url_for('ARMOR_ASSES') }}"><button type="button">Next</button></a>
+    <button type="submit">Send</button>
+  </form>
+</main>
+<script>
+// Wait for the initial page content to load before hiding the preloader
+window.addEventListener('load', function () {
+  const preloader = document.getElementById('preloader');
+  if (preloader) {
+      preloader.style.display = 'none';
+  }
+});
+
+// All chat logic will be safely contained within this one event listener
+document.addEventListener('DOMContentLoaded', () => {
+    // --- VARIABLES & CONSTANTS ---
+    const chatForm = document.getElementById('chat-form');
+    const userInput = document.getElementById('user-input');
+    const submitBtn = chatForm.querySelector('button[type="submit"]');
+    const chatBox = document.getElementById('chat-box');
+
+    const initialPrompts = 0;// <?php echo json_encode($promptLines, JSON_UNESCAPED_UNICODE); ?>;
+    const maxQueries = 2;
+    let initialUserMessageCount = 0;
+
+    const SYSTEM_INSTRUCTION = `
+### YOUR TASK ###
+You are an assistant named ARMOR. Your goal is to analyze user-provided hazards and answer follow-up questions.
+Use the conversation history to understand the context of the user's questions.
+Generate a response following *exactly* the format below.
+
+### RESPONSE FORMAT (STRICT) ###
+
+LLM RESPONSE:
+Interpret severity + risk values. In an Extensive Response break down the meaning of the severity and risk values.
+Mention 
+
+CONTROLS:
+1. [Short, specific command]
+2. [Short, specific command]
+3. [Short, specific command]
+4. [Short, specific command]
+5. [Short, specific command]
+
+### DO NOT OUTPUT ANYTHING OUTSIDE THIS FORMAT ###
+Be clear, direct, and professional.
+`.trim();
+
+    // --- CORE FUNCTIONS ---
+
+    /**
+     * Adds a message to the chat box. Can handle user, bot, system, and typing messages.
+     * @param {string} sender - 'You', 'ARMOR', or 'System'.
+     * @param {string} text - The message content.
+     * @param {boolean} isTyping - If true, displays a typing indicator instead of text.
+     * @returns {HTMLElement} The created message element.
+     */
+    function addMessage(sender, text, isTyping = false) {
+        const msgWrapper = document.createElement('div');
+        msgWrapper.className = 'message';
+
+        const content = document.createElement('div');
+        content.className = 'message-content';
+        
+        const senderSpan = document.createElement('div');
+        senderSpan.className = 'sender';
+
+        if (sender === 'You') {
+            msgWrapper.classList.add('user');
+            senderSpan.textContent = 'You';
+            content.textContent = text;
+        } else if (sender === 'ARMOR') {
+            msgWrapper.classList.add('bot');
+            senderSpan.textContent = 'ARMOR';
+            if (isTyping) {
+                content.innerHTML = `
+                    <div class="typing-indicator">
+                        <span>is typing</span>
+                        <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+                    </div>`;
+            } else {
+                const pre = document.createElement('pre');
+                pre.className = 'llm-response';
+                pre.textContent = text;
+                content.appendChild(pre);
+            }
+        } else if (sender === 'System') {
+             msgWrapper.classList.add('system');
+             content.textContent = text;
+        }
+        
+        if (sender !== 'System') {
+            msgWrapper.appendChild(senderSpan);
+        }
+        msgWrapper.appendChild(content);
+        chatBox.appendChild(msgWrapper);
+        chatBox.scrollTop = chatBox.scrollHeight;
+        return msgWrapper;
+    }
+
+    /**
+     * **NEW FUNCTION**
+     * Reads the current chat and builds a text-based history for the LLM.
+     * @returns {string} A string representing the conversation history.
+     */
+    function buildConversationHistory() {
+        const messages = chatBox.querySelectorAll('.message');
+        const historyLines = [];
+
+        messages.forEach(msg => {
+            let role = '';
+            let text = '';
+            
+            if (msg.classList.contains('user')) {
+                role = 'User';
+                // Find the text content, avoiding the sender span
+                const contentEl = msg.querySelector('.message-content');
+                if (contentEl) text = contentEl.textContent.trim();
+
+            } else if (msg.classList.contains('bot')) {
+                role = 'Assistant';
+                 // Find the pre-formatted LLM response text
+                const contentEl = msg.querySelector('.llm-response');
+                if (contentEl) text = contentEl.textContent.trim();
+            }
+
+            // Only add messages with a valid role and text to the history
+            if (role && text) {
+                historyLines.push(`${role}: ${text}`);
+            }
+        });
+
+        return historyLines.join('\n');
+    }
+
+    /**
+     * Disables the input field and submit button.
+     */
+    function lockUserInput() {
+        userInput.disabled = true;
+        submitBtn.disabled = true;
+        userInput.placeholder = "⚠️ Query limit reached";
+        userInput.style.backgroundColor = "#eee";
+    }
+
+    /**
+     * Sends the initial hazard data from PHP to the LLM.
+     */
+    async function sendInitialPrompts() {
+        if (!Array.isArray(initialPrompts) || initialPrompts.length === 0) return;
+
+        for (const line of initialPrompts) {
+            // Add the initial hazard info as a "User" message for context
+            addMessage('You', line);
+            const typingIndicator = addMessage('ARMOR', '', true);
+
+            // Construct the prompt using the conversation history, which now includes the hazard line
+            const conversationHistory = buildConversationHistory();
+            const fullPrompt = `${SYSTEM_INSTRUCTION}\n\n--- Conversation History ---\n${conversationHistory}`;
+
+            try {
+                const res = await fetch('{{ url_for("llm_proxy") }}', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ prompt: fullPrompt, contextOnly: true })
+                });
+                const data = await res.json();
+                addMessage('ARMOR', data.reply || 'No initial response received.');
+            } catch (error) {
+                console.error("Error fetching initial prompt:", error);
+                addMessage('System', 'An error occurred while getting the initial analysis.');
+            } finally {
+                typingIndicator.remove();
+            }
+        }
+        initialUserMessageCount = chatBox.querySelectorAll('.message.user').length;
+    }
+
+    // --- EVENT LISTENERS ---
+
+    // Main submit handler for user queries
+    chatForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const currentQueryCount = chatBox.querySelectorAll('.message.user').length - initialUserMessageCount;
+        if (currentQueryCount >= maxQueries) {
+            return; // Don't allow submission if limit is already met
+        }
+
+        const userMessage = userInput.value.trim();
+        if (!userMessage) return;
+
+        addMessage('You', userMessage);
+        userInput.value = '';
+
+        const typingIndicator = addMessage('ARMOR', '', true);
+
+        try {
+            // **THIS IS THE KEY CHANGE**
+            // Build the history from the chat box *after* adding the new user message.
+            const conversationHistory = buildConversationHistory();
+            const fullPrompt = `${SYSTEM_INSTRUCTION}\n\n--- Conversation History ---\n${conversationHistory}`;
+
+            const res = await fetch('{{ url_for("llm_proxy") }}', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ prompt: fullPrompt })
+            });
+
+            if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+            
+            const data = await res.json();
+            addMessage('ARMOR', data.reply || 'Error: Empty response from server.');
+
+        } catch (error) {
+            console.error('Fetch error:', error);
+            addMessage('System', `An error occurred: ${error.message}`);
+        } finally {
+            typingIndicator.remove(); // Always remove indicator
+        }
+
+        // Check if the query limit has now been reached
+        const newQueryCount = chatBox.querySelectorAll('.message.user').length - initialUserMessageCount;
+        if (newQueryCount >= maxQueries) {
+            addMessage('System', 'Query limit reached — no more submissions allowed.');
+            lockUserInput();
+        }
+    });
+
+    // --- INITIALIZATION ---
+    sendInitialPrompts();
+});
+</script>
+</body>
+</html>

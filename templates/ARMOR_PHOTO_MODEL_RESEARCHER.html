@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Website Name | Home</title>
+    
+    <!-- Google Fonts for aesthetics -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+
+    <!-- Your Custom Stylesheet -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header class="site-header">
+    <div class="header-content">
+        <a href ="{{ url_for('home') }}" class="logo">
+            <img src="{{ url_for('static', filename='DOD logo.png') }}" alt="CMMD Logo" class="logo-icon">
+        <h1>ARMOR</h1>          
+        </a><br><h1>|</h1><br>
+        <a href ="{{ url_for('ETI_HOME') }}" class="logo">
+        <h1>ETI</h1>
+        </a>
+        <nav class="nav-menu">
+            <a href="{{ url_for('home') }}">Home</a>
+            <a href="{{ url_for('CMMD_risk_choice') }}">ARMOR</a>
+            <a href="{{ url_for('ARMOR_QUER') }}">ARMOR ANALYSIS</a>
+            <a href="{{ url_for('ARMOR_QUER_RESEARCH') }}">ARMOR ANALYSIS(RESEARCHER)</a>
+            <a href="{{ url_for('about') }}">About</a>
+            <a href="{{ url_for('projects') }}">Projects</a>
+            </nav>
+    </div>
+</header>   <!-- Preloader -->
+  <title>Model Image Chat</title>
+</head>
+<body>
+    <style>
+
+    body {
+        background-image: url("{{ url_for('static', filename='CMMD_wall_home.png') }}");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+      font-family: sans-serif;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+#image-output1 {
+  margin-top: 90px;
+  display: inline-block;
+  padding: 10px;
+  border: 2px dashed #ccc;
+  background: #fff;
+  margin-bottom: 1rem;
+  text-align: center;
+  max-width: 100%;
+}
+
+#image-output1 img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+    #image-output {
+      margin-top: 90px;
+      width: 500px;
+      height: 500px;
+      border: 2px dashed #ccc;
+      background: #fff;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    #image-output img {
+      max-width: 100%;
+      max-height: 100%;
+    }
+
+    #chat-box {
+      display: flex;
+      width: 400px;
+    }
+
+    #user-input {
+      flex: 1;
+      padding: 0.5rem;
+      font-size: 1rem;
+    }
+
+    #submitBtn {
+      padding: 0.5rem 1rem;
+      justify-content: center;
+      width: 90px;
+      height: 50px;
+      background:rgb(10, 149, 218);
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    #submitBtn:hover {
+      background: rgb(7, 110, 158);
+    }
+    #submitBtn1 {
+      padding: 0.5rem 1rem;
+      justify-content: center;
+      width: 90px;
+      height: 50px;
+      background:rgb(10, 149, 218);
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    #submitBtn1:hover {
+      background: rgb(7, 110, 158);
+    }
+    #button {
+      padding: 0.25rem 0.5rem;
+      justify-content: center;;
+      background:rgb(5, 100, 147);
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+    #button:hover {
+      background: rgb(4, 64, 92);
+    }
+
+#loading {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  display: none;
+  font-style: italic, bold;
+  color:rgb(219, 219, 219);
+  font-size: 1.1rem;
+  font-weight: 500;
+  text-align: center;
+  animation: pulse 1.2s infinite;
+  z-index: 999;
+}
+
+@keyframes pulse {
+  0%   { opacity: 0.4; }
+  50%  { opacity: 1; }
+  100% { opacity: 0.4; }
+}
+    details {
+    margin-top: 1rem;
+    background-color: #222;
+    color: #ccc;
+    padding: 0.5rem;
+    border-radius: 4px;
+  }
+  .llm-response{
+      padding: 1rem;
+      justify-content: center;
+      margin-bottom: 20px;
+      border-radius: 5px;
+      width: 130px;
+      height: 55px;
+      background:rgb(6, 118, 173);
+      color: white;
+      border: none;
+      cursor: pointer;
+  }
+  .llm-response:hover {
+      background: rgb(4, 89, 129);
+  }
+#llm-control-output {
+  display: none;
+  background: #eef3f8;
+  padding: 1rem;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  color: #333;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.95rem;
+  overflow-x: auto;           /* 🔹 Enable horizontal scrolling if needed */
+  width: fit-content;
+  min-width: 300px;
+  max-width: 95vw;            /* 🔹 Prevents overflow from screen */
+  white-space: nowrap;        /* 🔹 Prevent line breaks */
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+#llm-response-text {
+  white-space: pre;           /* 🔹 Preserve line breaks, but don't wrap lines */
+  font-family: monospace;
+  font-size: 0.9rem;
+}
+#StepT {
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  width: 170px;
+  height: 55px;
+  margin-bottom: 20px;
+  background: rgb(6, 118, 173);
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+#StepT:hover {
+  background: rgb(4, 89, 129);
+}
+#llm-response {
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  width: 170px;
+  height: 55px;
+  background: rgb(6, 118, 173);
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+#llm-response:hover {
+  background: rgb(4, 89, 129);
+}
+#back-button{
+  margin-top: 50px;
+  margin-bottom: -80px;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  width: 170px;
+  height: 55px;
+  background: rgb(6, 118, 173);
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+#back-button:hover {
+  background: rgb(4, 89, 129);
+}
+#back-button1{
+  margin-top: 50px;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  width: 170px;
+  height: 55px;
+  background: rgb(6, 118, 173);
+  color: white;
+  border: none;
+  cursor: pointer;
+  z-index: 3;
+}
+#back-button1:hover {
+  background: rgb(4, 89, 129);
+}
+  </style>
+  <button id="back-button" class="back-button">Back</button>
+  <button id="back-button1" class="back-button1">Back</button>
+  <div id="image-output">Image will appear here</div>
+  <div id="image-output1">Image will appear here</div>
+  <!-- New Control Output Box -->
+<div id="llm-control-output">
+  <strong>Recommended Controls:</strong>
+  <pre id="llm-response-text"></pre>
+</div>
+  <div id="chat-box">
+    <input type="text" id="user-input" placeholder="How Would You Like to Refine the Causal Graph?..." />
+  </div>        
+  <div id="loading">Generating image...</div>
+  <a href="{{ url_for('ARMOR_CHOICE_PAGE')}}"><button type="button" id="button">Back to Choice Page</button></a>
+  <button id="StepT" class="StepT">Show Step 2</button>
+  <button id="llm-response" class="llm-response">Show LLM Response</button>
+  <button id="submitBtn">Send</button>
+  <button id="submitBtn1">Send</button>
+
+<script>
+document.addEventListener('DOMContentLoaded', async () => {
+  const imageOutput = document.getElementById('image-output');
+  const imageOutput1 = document.getElementById('image-output1');
+  const loadingText = document.getElementById('loading');
+  const submitBtn = document.getElementById('submitBtn'); // ✅ added
+  const submitBtn1 = document.getElementById('submitBtn1'); // ✅ added
+  const backButton = document.getElementById('button');  
+  const StepBtn = document.getElementById('StepT');
+  const controlBtn = document.getElementById('llm-response');
+  const llmResponseText = document.getElementById('llm-response-text');
+  const llmControlOutput = document.getElementById('llm-control-output');
+  const BackButton = document.getElementById('back-button');
+  const BackButton1 = document.getElementById('back-button1');
+  const userInputField = document.getElementById('user-input');
+  // 🔸 Disable the button while loading
+  submitBtn.disabled = true;
+  submitBtn.style.opacity = '0.5';
+  submitBtn.style.cursor = 'not-allowed';
+  // 🔸 Disable the button while loading
+  backButton.disabled = true;
+  backButton.style.opacity = '0.5';
+  backButton.style.cursor = 'not-allowed';
+   // 🔸 Disable the button while loading
+  StepBtn.disabled = true;
+  StepBtn.style.opacity = '0.5';
+  StepBtn.style.cursor = 'not-allowed';
+  // Show loading indicator
+  loadingText.style.display = 'block';
+  controlBtn.style.display = 'none';
+  imageOutput1.style.display = 'none';  
+  BackButton.style.display = 'none';
+  BackButton1.style.display = 'none';
+  submitBtn1.style.display = 'none';
+  imageOutput.innerHTML = '';
+
+  try {
+    const resp = await fetch('render-output.php');
+    const data = await resp.json();
+
+    if (data.error) {
+      imageOutput.textContent = 'Error: ' + data.error;
+      console.error("❌ Error from backend:", data.log || data.error);
+    } else {
+      console.log("📷 Image URL:", data.image_url);
+
+      const img = new Image();
+      img.src = data.image_url;
+      img.alt = 'Generated causal graph';
+      img.style.maxWidth = '100%';
+      img.onload = () => console.log("✅ Image loaded successfully.");
+      img.onerror = () => console.error("❌ Failed to load image from", img.src);
+
+      imageOutput.appendChild(img);
+
+      // Optional: just log text_output to console
+      if (data.text_output) {
+        console.log("📝 Text output from Python:", data.text_output);
+      }
+    }
+  } catch (err) {
+    imageOutput.textContent = 'Network or parsing error';
+    console.error("❌ Fetch error:", err);
+  } finally {
+    // ✅ Enable buttons when image loads
+    submitBtn.disabled = false;
+    submitBtn.style.opacity = '1';
+    submitBtn.style.cursor = 'pointer';
+    backButton.disabled = false;
+    backButton.style.opacity = '1';
+    backButton.style.cursor = 'pointer';
+    controlBtn.disabled = false;
+    controlBtn.style.opacity = '1';
+    controlBtn.style.cursor = 'pointer';
+    StepBtn.disabled = false;
+    StepBtn.style.opacity = '1';
+    StepBtn.style.cursor = 'pointer';
+    loadingText.style.display = 'none';
+
+  }
+  // 2. Submit feedback to regenerate image
+  submitBtn.addEventListener('click', async () => {
+    document.getElementById('llm-control-output').style.display = 'none';
+      // 🔸 Disable the button while loading
+    submitBtn.disabled = true;
+    submitBtn.style.opacity = '0.5';
+    submitBtn.style.cursor = 'not-allowed';
+    // 🔸 Disable the button while loading
+    backButton.disabled = true;
+    backButton.style.opacity = '0.5';
+    backButton.style.cursor = 'not-allowed';
+    // 🔸 Disable the button while loading
+    controlBtn.disabled = true;
+    controlBtn.style.opacity = '0.5';
+    controlBtn.style.cursor = 'not-allowed';
+      // 🔸 Disable the button while loading
+    StepBtn.disabled = true;
+    StepBtn.style.opacity = '0.5';
+    StepBtn.style.cursor = 'not-allowed';
+    const userInputField = document.getElementById('user-input');
+    const userFeedback = userInputField.value.trim();
+
+    if (!userFeedback) {
+      alert("⚠️ Please enter feedback before submitting.");
+      userInputField.focus();
+
+      // Re-enable the button since no submission happened
+      submitBtn.disabled = false;
+      submitBtn.style.opacity = '1';
+      submitBtn.style.cursor = 'pointer';
+
+      return;
+    }
+
+    loadingText.style.display = 'block';
+    imageOutput.innerHTML = '';
+
+    try {
+      const resp = await fetch('render-output.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ feedback: userFeedback })
+      });
+
+      const data = await resp.json();
+
+      if (data.error) {
+      imageOutput.textContent = 'Error: ' + data.error;
+      console.error("❌ Error from backend:", data.log || data.error);
+    } else {
+      console.log("📷 Image URL:", data.image_url);
+
+      const img = new Image();
+      img.src = data.image_url;
+      img.alt = 'Generated causal graph';
+      img.style.maxWidth = '100%';
+      img.onload = () => console.log("✅ Image loaded successfully.");
+      img.onerror = () => console.error("❌ Failed to load image from", img.src);
+
+      imageOutput.appendChild(img);
+
+      // Optional: just log text_output to console
+      if (data.text_output) {
+        console.log("📝 Text output from Python:", data.text_output);
+      }
+    }
+  } catch (err) {
+    imageOutput.textContent = 'Network or parsing error';
+    console.error("❌ Fetch error:", err);
+  } finally {
+    // ✅ Enable buttons when image loads
+    submitBtn.disabled = false;
+    submitBtn.style.opacity = '1';
+    submitBtn.style.cursor = 'pointer';
+    backButton.disabled = false;
+    backButton.style.opacity = '1';
+    backButton.style.cursor = 'pointer';
+    controlBtn.disabled = false;
+    controlBtn.style.opacity = '1';
+    controlBtn.style.cursor = 'pointer';
+    StepBtn.disabled = false;
+    StepBtn.style.opacity = '1';
+    StepBtn.style.cursor = 'pointer';
+    loadingText.style.display = 'none';
+  }
+  });
+StepBtn.addEventListener('click', async () => {
+  // Disable UI
+  [submitBtn, backButton, controlBtn, StepBtn].forEach(btn => {
+    btn.disabled = true;
+    btn.style.opacity = '0.5';
+    btn.style.cursor = 'not-allowed';
+  });
+
+  loadingText.style.display = 'block';
+  controlBtn.style.display = 'block';
+  backButton.style.display = 'block';
+  submitBtn.style.display = 'none';
+  submitBtn1.style.display = 'block';
+  imageOutput.style.display = 'none';
+
+  try {
+    const imageUrl = '{{ url_for("static", filename="uploads/causal_graph_step2.png") }}?' + Date.now(); // No caching
+    const img = new Image();
+    img.src = imageUrl;
+    img.alt = 'Step 2 Causal Graph';
+    img.style.maxWidth = '500px';
+    img.style.maxHeight = '500px'; // Limit height for better layout
+
+    img.onload = () => {
+      console.log("✅ Step 2 image loaded.");
+      imageOutput1.innerHTML = ''; // Clear container first
+      imageOutput1.appendChild(img);
+      imageOutput1.style.display = 'block';
+    };
+
+    img.onerror = () => {
+      console.error("❌ Failed to load Step 2 image.");
+      imageOutput1.textContent = 'Failed to load image.';
+      imageOutput1.style.display = 'block';
+    };
+  } catch (err) {
+    console.error("❌ Unexpected error:", err);
+  } finally {
+    // Re-enable UI
+    [submitBtn, backButton, controlBtn, StepBtn].forEach(btn => {
+      btn.disabled = false;
+      btn.style.opacity = '1';
+      btn.style.cursor = 'pointer';
+    });
+    StepBtn.style.display = 'none';
+    loadingText.style.display = 'none';
+  }
+});
+submitBtn1.addEventListener('click', async () => {
+  const userInputField = document.getElementById('user-input');
+  const userFeedback1 = userInputField.value.trim();
+
+  if (!userFeedback1) {
+    alert("⚠️ Please enter feedback before submitting.");
+    userInputField.focus();
+
+    // Re-enable the button if it was disabled
+    controlBtn.disabled = false;
+    controlBtn.style.opacity = '1';
+    controlBtn.style.cursor = 'pointer';
+    submitBtn1.disabled = false;
+    submitBtn1.style.opacity = '1';
+    submitBtn1.style.cursor = 'pointer';
+    backButton.disabled = false;
+    backButton.style.opacity = '1';
+    backButton.style.cursor = 'pointer';
+    return;
+  }
+  // Optional: Disable the button during loading
+  controlBtn.disabled = true;
+  controlBtn.style.opacity = '0.5';
+  controlBtn.style.cursor = 'not-allowed';
+  submitBtn1.disabled = true;
+  submitBtn1.style.opacity = '0.5';
+  submitBtn1.style.cursor = 'not-allowed';
+  backButton.disabled = true;
+  backButton.style.opacity = '0.5';
+  backButton.style.cursor = 'not-allowed';
+  loadingText.style.display = 'block';
+  imageOutput1.innerHTML = '';
+
+  try {
+    const resp = await fetch('render-output.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ feedback1: userFeedback1 })  // ✅ send as `feedback1`
+    });
+
+    const data = await resp.json();
+    loadingText.style.display = 'block';
+    imageOutput1.innerHTML = '';
+
+    if (data.error) {
+      imageOutput1.textContent = 'Error: ' + data.error;
+      console.error("❌ Error from backend:", data.log || data.error);
+    } else {
+      console.log("📷 Image URL:", data.image_url);
+
+      const img = new Image();
+      img.src = data.image_url;
+      img.alt = 'Generated causal graph';
+      img.style.maxWidth = '100%';
+      img.onload = () => console.log("✅ Image loaded successfully.");
+      img.onerror = () => console.error("❌ Failed to load image from", img.src);
+      loadingText.style.display = 'none';
+      imageOutput1.appendChild(img);
+
+      if (data.text_output) {
+        console.log("📝 Text output from Python:", data.text_output);
+      }
+    }
+  } catch (err) {
+    imageOutput1.textContent = 'Network or parsing error';
+    console.error("❌ Fetch error:", err);
+  } finally {
+    loadingText.style.display = 'none';
+    controlBtn.disabled = false;
+    controlBtn.style.opacity = '1';
+    controlBtn.style.cursor = 'pointer';
+    submitBtn1.disabled = false;
+    submitBtn1.style.opacity = '1';
+    submitBtn1.style.cursor = 'pointer';
+    backButton.disabled = false;
+    backButton.style.opacity = '1';
+    backButton.style.cursor = 'pointer';
+  }
+});
+  BackButton.addEventListener('click', async () => {
+    imageOutput1.style.display = 'none';
+    imageOutput.style.display = 'block';
+    BackButton.style.display = 'none';
+  });
+  BackButton1.addEventListener('click', async () => {
+    imageOutput1.style.display = 'block';
+    imageOutput.style.display = 'none';
+    BackButton1.style.display = 'none';
+    BackButton.style.display = 'block';
+    userInputField.style.display = 'block';
+    llmResponseText.style.display = 'none';
+    llmControlOutput.style.display = 'none';
+    StepBtn.style.display = 'block';
+    submitBtn.style.display = 'block';
+    submitBtn1.style.display = 'none';
+  });
+
+  // Helper: render image + text block
+  function renderImageAndText(data) {
+    const img = new Image();
+    img.src = data.image_url + '?v=' + new Date().getTime();  // Prevent caching
+    img.alt = 'Causal graph';
+    img.style.maxWidth = '100%';
+    img.onload = () => console.log("✅ Image loaded.");
+    img.onerror = () => console.warn("❌ Failed to load image:", img.src);
+    imageOutput.appendChild(img);
+
+    if (data.text_output) {
+      const txt = document.createElement('pre');
+      txt.textContent = data.text_output;
+      txt.style.marginTop = '1rem';
+      imageOutput.appendChild(txt);
+    }
+  }
+  
+controlBtn.addEventListener('click', async () => {
+  // Disable all buttons
+  [submitBtn, backButton, controlBtn, StepBtn].forEach(btn => {
+    btn.disabled = true;
+    btn.style.opacity = '0.5';
+    btn.style.cursor = 'not-allowed';
+  });
+  llmResponseText.style.display = 'none';
+  imageOutput.style.display = 'none';
+  imageOutput1.style.display = 'none';
+  BackButton.style.display = 'none';
+  BackButton1.style.display = 'block';
+  llmControlOutput.style.display = 'none';
+  loadingText.style.display = 'block';
+  userInputField.style.display = 'none';
+
+  try {
+    const resp = await fetch('get-control-output.php?' + new Date().getTime()); // prevent cache
+    const data = await resp.json();
+
+    llmResponseText.textContent = data.text_output || 'No control file found.';
+    llmControlOutput.style.display = 'block';
+  } catch (err) {
+    llmResponseText.textContent = '⚠️ Error reading control file.';
+    console.error("❌ Could not read control file:", err);
+    llmControlOutput.style.display = 'block';
+  } finally {
+    [submitBtn, backButton, controlBtn, StepBtn].forEach(btn => {
+      btn.disabled = false;
+      btn.style.opacity = '1';
+      btn.style.cursor = 'pointer';
+    });
+    llmResponseText.style.display = 'block';
+    llmControlOutput.style.display = 'block';
+    BackButton1.style.display = 'block';
+    loadingText.style.display = 'none';
+  }
+});
+  // Helper: render image + text block
+  function renderImageAndText(data) {
+    const img = new Image();
+    img.src = data.image_url + '?v=' + new Date().getTime();  // Prevent caching
+    img.alt = 'Causal graph';
+    img.style.maxWidth = '100%';
+    img.onload = () => console.log("✅ Image loaded.");
+    img.onerror = () => console.warn("❌ Failed to load image:", img.src);
+    imageOutput.appendChild(img);
+
+    if (data.text_output) {
+      const txt = document.createElement('pre');
+      txt.textContent = data.text_output;
+      txt.style.marginTop = '1rem';
+      imageOutput.appendChild(txt);
+    }
+  }
+
+  // Trigger initial image load
+  loadInitialGraph();
+});
+</script>
+</body>
+</html>

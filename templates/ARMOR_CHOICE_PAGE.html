@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Website Name | Home</title>
+    
+    <!-- Google Fonts for aesthetics -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+
+    <!-- Your Custom Stylesheet -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header class="site-header">
+    <div class="header-content">
+        <a href ="{{ url_for('home') }}" class="logo">
+            <img src="{{ url_for('static', filename='DOD logo.png') }}" alt="CMMD Logo" class="logo-icon">
+        <h1>ARMOR</h1>          
+        </a><br><h1>|</h1><br>
+        <a href ="{{ url_for('ETI_HOME') }}" class="logo">
+        <h1>ETI</h1>
+        </a>
+        <nav class="nav-menu">
+            <a href="{{ url_for('home') }}">Home</a>
+            <a href="{{ url_for('CMMD_risk_choice') }}">ARMOR</a>
+            <a href="{{ url_for('ARMOR_QUER') }}">ARMOR ANALYSIS</a>
+            <a href="{{ url_for('ARMOR_QUER_RESEARCH') }}">ARMOR ANALYSIS(RESEARCHER)</a>
+            <a href="{{ url_for('about') }}">About</a>
+            <a href="{{ url_for('projects') }}">Projects</a>
+            </nav>
+    </div>
+</header>   <!-- Preloader -->
+<style>
+body {
+    background-image: url("{{ url_for('static', filename='CMMD_wall_home.png') }}");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+    .model-choice{
+        z-index: 3;
+        padding: 2rem;
+        background-color:rgb(228, 189, 31);
+        border:2px solid rgb(237, 237, 237);
+        border-radius: 12px;
+    }
+    .model-case{
+        margin-top: 4rem;
+        background-color: #2e2e2e;
+        border-radius: 12px;
+  padding: 2rem;
+    border: 2px solid #ffc107; /* yellow border */
+    box-shadow: #1f1f1f;
+    }
+    .model-card {
+      flex: 1;
+      margin-top: 30px;
+      margin:auto;
+  min-height: 80px;
+  max-width: 250px;
+  width: 100%;
+  background-color:rgb(56, 56, 56);
+  border: 2px solid #ffc107; /* yellow border */
+  border-radius: 12px;
+  padding: 2rem;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.2rem;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+    }
+    .model-card:hover {
+      background-color:rgb(34, 33, 33);
+    }
+.model-wrapper.disabled {
+  position: relative;
+  opacity: 0.5;
+  pointer-events: none;
+}
+        .model-card1 {
+      flex: 1;
+      margin-top: 30px;
+      margin:auto;
+  min-height: 80px;
+  max-width: 250px;
+  width: 100%;
+  background-color:rgb(56, 56, 56);
+  border: 2px solid #ffc107; /* yellow border */
+  border-radius: 12px;
+  padding: 2rem;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.2rem;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+    }
+    .model-card1:hover {
+      background-color:rgb(34, 33, 33);
+    }
+    .model-card1.disabled {
+     opacity: 0.4;
+  pointer-events: none;
+  background-color: #1f1f1f;
+    }
+.model-choice p{
+  padding: 10px;
+}
+    .model-container {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    .model-text{
+        text-align: center;
+        margin-top: 4.3rem;
+        font-size: 30px;
+        font: "Trebuchet MS", "bold", "sans-serif";
+        color:rgb(238, 216, 13);
+        justify-content: center;
+    }
+    .model-image {
+  width: 230px;
+  height: 200px;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  border: 2px solid #ffc107; /* yellow border for image */
+  justify-content: center;
+}
+    .model-choice p{
+font: "Futura", "sans-serif", "bold";
+color:rgb(29, 29, 29);
+}
+.next-button{
+    flex: 1;
+    margin: auto;
+      margin-top: 20px;
+      right: 3rem;
+  min-height: 30px;
+  max-width: 140px;
+  background-color:rgb(56, 56, 56);
+  border: 2px solid #ffc107; /* yellow border */
+  border-radius: 12px;
+  padding: 0.5rem;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.2rem;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  display: flex;
+  position:center;
+  align-items: center;
+  justify-content: center;
+}
+  .model-card.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+    cursor: default;
+  }
+  .disabled-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(30, 30, 30, 0.6);
+  border-radius: 12px;
+  z-index: 10;
+  pointer-events: all;
+}
+.model-wrapper {
+  position: relative;
+}
+  </style>
+</head>
+
+<body>
+  <main>
+    <div class = "model-case">
+    <div class = "model-text">
+    <h2>Choose a Model</h2>
+    </div>
+    <div class="model-container">
+      <div class="model-choice">
+        <img src="{{ url_for('static', filename='images (1).png') }}" alt="Photo Model" class="model-image" />
+        <p>This Model uses a LLM to generate an insightful causal graph and causal descriptions
+            that identify the different hazards associated with your input.
+        </p>          
+        
+        <a href="{{ url_for('ARMOR_PHOTO_MODEL_RESEARCHER') }}">
+          <div class="model-wrapper" data-m="model1">  
+        <div class="model-card" data-model="model1">CASUAL GRAPH MODEL</div>
+      </div>
+    </a>
+</div>
+<div class = "model-choice">
+    <img src ="{{ url_for('static', filename='Screenshot 2025-07-14 at 10.08.25 AM.png')}}"alt="Photo Model" class="model-image" />
+    <p>This model evaluates your text and image input and establishes a level of severity dependent
+        on the inputs provided.
+    </p>
+            <a href="{{ url_for('CMMD_CHOICE_PAGE') }}">    
+      <div class="model-wrapper" data-m="model3">
+      <div class="model-card" data-model="model3">CMMD</div>    
+    </div>
+      </a> 
+    </div>
+    </div>
+   <div>   
+    <a href="{{ url_for('ARMOR_ASESS_RESEARCHER') }}">
+        <label class = "next-button">NEXT</label>
+      </a>
+    </div>
+    </div>
+  </main>
+
+<script>
+  //const hasQuerImage = <?php echo isset($_SESSION['quer_image']) && file_exists($_SESSION['quer_image']) ? 'true' : 'false'; ?>;
+  //const hasQuerAudio = <?php echo isset($_SESSION['quer_audio']) && file_exists($_SESSION['quer_audio']) ? 'true' : 'false'; ?>;
+
+  document.addEventListener('DOMContentLoaded', () => {
+      fetch("{{ url_for('get_selected_models') }}")
+    .then(res => res.json())
+    .then(selectedModels => {
+      selectedModels.forEach(model => {
+        const wrapper = document.querySelector(`[data-m="${model}"]`);
+        if (wrapper) {
+          wrapper.classList.add("disabled");
+          const parentLink = wrapper.closest("a");
+          if (parentLink) {
+            parentLink.addEventListener("click", e => e.preventDefault());
+          }
+        }
+      });
+    });
+  if (!hasQuerImage) {
+    const photoModelCard = document.querySelector('[data-model="model1"]');
+    const photoModelCard1 = document.querySelector('[data-model="model3"]');
+    const photoModelLink = photoModelCard?.closest('a');
+
+    if (photoModelCard) {
+        photoModelCard.classList.add('disabled');
+        photoModelCard.setAttribute("title", "Disabled: No photo uploaded.");
+      }
+
+    if (photoModelLink) {
+        photoModelLink.addEventListener('click', e => e.preventDefault());
+    }
+    if (photoModelCard1) {
+        photoModelCard1.classList.add('disabled');
+        photoModelCard1.setAttribute("title", "Disabled: No photo uploaded.");
+      }
+
+    if (photoModelLink) {
+        photoModelLink.addEventListener('click', e => e.preventDefault());
+    }
+  }
+  if (!hasQuerAudio) {
+    const photoModelCard = document.querySelector('[data-model="model1"]');
+    const photoModelCard1 = document.querySelector('[data-model="model3"]');
+    const photoModelLink = photoModelCard?.closest('a');
+
+    if (photoModelCard) {
+        photoModelCard.classList.add('disabled');
+        photoModelCard.setAttribute("title", "Disabled: No photo uploaded.");
+      }
+
+    if (photoModelLink) {
+        photoModelLink.addEventListener('click', e => e.preventDefault());
+    }
+  }
+});
+const wrappers = document.querySelectorAll(".model-wrapper");
+
+// Get previously selected models from localStorage
+let selectedModels = JSON.parse(localStorage.getItem("selectedModels") || "[]");
+
+// Disable already selected models on load
+selectedModels.forEach(model => {
+  const wrapper = document.querySelector(`[data-m="${model}"]`);
+  if (wrapper) {
+    wrapper.classList.add("disabled");
+    const parentLink = wrapper.closest("a");
+    if (parentLink) {
+      parentLink.addEventListener("click", e => e.preventDefault());
+    }
+  }
+});
+
+// Track model selection and disable
+wrappers.forEach(wrapper => {
+  wrapper.addEventListener("click", () => {
+    const model = wrapper.getAttribute("data-m");
+    if (!selectedModels.includes(model)) {
+      selectedModels.push(model);
+      localStorage.setItem("selectedModels", JSON.stringify(selectedModels));
+    }
+  });
+});
+
+
+function setModelChoice(model) {
+  fetch("{{ url_for('store_model_choice') }}", {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({ model: model })
+  })
+  .then(res => res.json())
+  .then(data => {
+    console.log("Stored models on server:", data.selected_models);
+  });
+}
+
+
+  // Hook into your buttons or divs:
+  document.querySelector([href="{{ url_for('ARMOR_PHOTO_MODEL_RESEARCHER')}}"])
+    ?.addEventListener('click', () => setModelChoice('photo_model'));
+
+  document.querySelector([href="{{ url_for('CMMD_CHOICE_PAGE')}}"])
+    ?.addEventListener('click', () => setModelChoice('cmmd'));
+
+
+// Clear memory on "NEXT"
+document.querySelector(".next-button")?.addEventListener("click", () => {
+  localStorage.removeItem("selectedModels");
+});
+</script>
+</body>
+</html>

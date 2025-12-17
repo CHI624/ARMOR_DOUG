@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Website Name | Home</title>
+    
+    <!-- Google Fonts for aesthetics -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+
+    <!-- Your Custom Stylesheet -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header class="site-header">
+    <div class="header-content">
+        <a href ="{{ url_for('home') }}" class="logo">
+            <img src="{{ url_for('static', filename='DOD logo.png') }}" alt="CMMD Logo" class="logo-icon">
+        <h1>ARMOR</h1>          
+        </a><br><h1>|</h1><br>
+        <a href ="{{ url_for('ETI_HOME') }}" class="logo">
+        <h1>ETI</h1>
+        </a>
+        <nav class="nav-menu">
+            <a href="{{ url_for('home') }}">Home</a>
+            <a href="{{ url_for('CMMD_risk_choice') }}">ARMOR</a>
+            <a href="{{ url_for('ARMOR_QUER') }}">ARMOR ANALYSIS</a>
+            <a href="{{ url_for('ARMOR_QUER_RESEARCH') }}">ARMOR ANALYSIS(RESEARCHER)</a>
+            <a href="{{ url_for('about') }}">About</a>
+            <a href="{{ url_for('projects') }}">Projects</a>
+            </nav>
+    </div>
+</header>   <!-- Preloader -->
+<body>
+<style>
+            body {
+    background-image: url("{{ url_for('static', filename='CMMD_wall_home.png') }}");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+  #civilian-job, #military-job {
+  width: 300px;           /* fixed width */
+  padding: 8px 12px;      /* some breathing room */
+  font-size: 16px;        /* readable text size */
+  border: 1.5px solid #888;
+  border-radius: 6px;
+  background-color: #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  justify-content: center;
+  cursor: pointer;
+  margin-bottom: 21px;
+}
+
+#civilian-job, #military-job:hover {
+  border-color: #005fcc;
+  box-shadow: 0 2px 10px rgba(0,95,204,0.3);
+}
+#JOB {
+  width: 300px;           /* fixed width */
+  padding: 8px 12px;      /* some breathing room */
+  font-size: 16px;        /* readable text size */
+  border: 1.5px solid #888;
+  border-radius: 6px;
+  background-color: #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  justify-content: center;
+  cursor: pointer;
+  margin-bottom: 21px;
+}
+
+#JOB:hover {
+  border-color: #005fcc;
+  box-shadow: 0 2px 10px rgba(0,95,204,0.3);
+}
+
+#JOB:focus {
+  outline: none;
+  border-color: #004a99;
+  box-shadow: 0 0 8px rgba(0,74,153,0.8);
+}
+
+</style>
+  <div id="welcome-screen" class="fade-screen">
+    <h1>Welcome to the ARMOR ANALYSIS</h1>
+  </div> 
+<main id="main-content">
+    <h2>STEP 1:</h2>
+    <h2>Identify Hazards</h2>
+    <form id = "combinedForm" method="POST" action="{{url_for('quer_submit')}}">
+     <section id = "form1">
+    <label for="name">Researcher Name:</label><br />
+    <input type="text" id="RESEARCHER_N" name="RESEARCHER_N" required /><br /><br />
+
+<label for="CHOICE">CHOOSE (MILITARY OR CIVILIAN?):</label><br />
+<radio id="SELECT" name="JOB" required>
+      <label><input type="radio" name="JOB" value="civilian" required>Civilian</label>
+      <label><input type="radio" name="JOB" value="military"required>Military</label>
+</radio>
+<div id="military-select" style="display:none;">
+  <label for="military-job">JOB (MILITARY MOS#/NAME):</label><br />
+  <select id="military-job" name="JOB">
+    <option value="">-- Select MOS and Name --</option>
+  </select>
+</div>
+
+<div id="civilian-select" style="display:none;">
+  <label for="civilian-job">JOB (CIVILIAN MOS#/NAME):</label><br />
+  <select id="civilian-job" name="JOB">
+    <option value="">-- Select MOS and Name --</option>
+  </select>
+</div>
+
+<script>
+fetch("{{ url_for('static',filename='/tables/mos_table.csv')}}")
+  .then(res => res.text())
+  .then(text => {
+    const lines = text.trim().split('\n');
+    const select = document.getElementById('military-job');
+    for (let i = 1; i < lines.length; i++) {
+      const [mos, name] = lines[i].split(',').map(s => s.trim());
+      const option = document.createElement('option');
+      option.value = `${mos} ${name}`;
+      option.textContent = `${mos} ${name}`;
+      select.appendChild(option);
+    }
+  });
+</script>
+<script>
+fetch("{{ url_for('static',filename='/tables/organized_civ_rank1.csv')}}")
+  .then(res => res.text())
+  .then(text => {
+    const lines = text.trim().split('\n');
+    const select = document.getElementById('civilian-job');
+    for (let i = 1; i < lines.length; i++) {
+      const [mos, name] = lines[i].split('|').map(s => s.trim());
+      const option = document.createElement('option');
+      option.value = `${mos} ${name}`;
+      option.textContent = `${mos} ${name}`;
+      select.appendChild(option);
+    }
+  });
+</script>
+<label for="mission_image">Select an image in relation to Query:</label><br />
+        <input type="file" id="QUER_IMAGE" name="QUER_IMAGE" accept="image/*" /><br /><br />
+
+    <label for="name">JOB DESCRIPTION:</label><br />
+    <input type="text" id="JOB_DESCR" name="JOB_DESCR" required /><br /><br />
+    <div id="hazardContainer">
+  <div class="hazard-block">
+    <label for="name" class="haz-label-1">IDENTIFY(MAIN HAZARD):</label><br />
+    <input type="text" id="MAIN_HAZ" name="MAIN_HAZ" required /><br /><br />
+        <label for="name" class="haz-label-2">DESCRIPTION OF MAIN HAZARD:</label><br />
+    <input type="text" id="DESCR_MAIN" name="DESCR_MAIN" required /><br /><br />
+        <label for="name" class="haz-label-3">HAZARD LOCATION:</label><br />
+    <input type="text" id="HAZ_LOC" name="HAZ_LOC" required /><br /><br />
+    </div>
+    </div>   
+    <button type="button" id = "addHazardBtn">ADD MORE HAZARDS</button>
+    <input type="hidden" name="hazardsList" id="hazardsList" />
+    <button type="submit">Next Page</button>
+
+
+</select>
+    </section>
+    </form>
+    </main>
+    <script src="{{url_for('static', filename='script.js')}}"></script>
+    <script>
+  document.addEventListener('DOMContentLoaded', () => {
+  // Get references to the elements
+  const militaryDiv = document.getElementById('military-select');
+  const civilianDiv = document.getElementById('civilian-select');
+  const militarySelect = document.getElementById('military-job');
+  const civilianSelect = document.getElementById('civilian-job');
+
+  // Add event listeners to the radio buttons
+  document.querySelectorAll('input[name="JOB"]').forEach(radio => {
+    radio.addEventListener('change', (event) => {
+      const selectedCategory = event.target.value;
+
+      if (selectedCategory === 'military') {
+        // Show military dropdown and enable it for submission
+        militaryDiv.style.display = 'block';
+        militarySelect.disabled = false;
+        
+        // Hide civilian dropdown and disable it
+        civilianDiv.style.display = 'none';
+        civilianSelect.disabled = true;
+
+      } else if (selectedCategory === 'civilian') {
+        // Show civilian dropdown and enable it for submission
+        civilianDiv.style.display = 'block';
+        civilianSelect.disabled = false;
+
+        // Hide military dropdown and disable it
+        militaryDiv.style.display = 'none';
+        militarySelect.disabled = true;
+              }
+    });
+  });
+});
+  const container = document.getElementById('hazardContainer');
+  const addBtn = document.getElementById('addHazardBtn');
+
+  addBtn.addEventListener('click', () => {
+    const blocks = container.querySelectorAll('.hazard-block');
+    const original = blocks[0];
+    const clone = original.cloneNode(true);
+
+    // Clear input values
+    clone.querySelectorAll('input').forEach(input => input.value = '');
+
+    // Update label text to say "SUBHAZARD" instead of "MAIN HAZARD"
+    clone.querySelector('.haz-label-1').textContent = 'IDENTIFY (SUBHAZARD):';
+    clone.querySelector('.haz-label-2').textContent = 'DESCRIPTION OF SUBHAZARD:';
+    clone.querySelector('.haz-label-3').textContent = 'SUBHAZARD LOCATION:';
+
+    // Add remove button
+    const removeBtn = document.createElement('button');
+    removeBtn.type = 'button';
+    removeBtn.textContent = '× Remove';
+    removeBtn.style.cssText = `
+      background: red; color: white;
+      border: none; padding: 0.5rem 1rem;
+      cursor: pointer; margin-top: 5px;
+    `;
+
+    removeBtn.addEventListener('click', () => {
+      clone.remove();
+    });
+
+    clone.appendChild(removeBtn);
+    container.appendChild(clone);
+  });
+</script>
+<script>
+    const hazardForm = document.querySelector('form');  // or give it an ID
+
+hazardForm.addEventListener('submit', e => {
+  // 1. Gather all hazard-blocks
+  const blocks = document.querySelectorAll('.hazard-block');
+  const list = [];
+
+  blocks.forEach(block => {
+    const main = block.querySelector('#MAIN_HAZ').value.trim();
+    const desc = block.querySelector('#DESCR_MAIN').value.trim();
+    const loc  = block.querySelector('#HAZ_LOC').value.trim();
+
+    if (main || desc || loc) {
+      list.push({ main_hazard: main, description: desc, location: loc });
+    }
+  });
+
+  // 2. JSON‑encode into the hidden input
+  document.getElementById('hazardsList').value = JSON.stringify(list);
+
+  // 3. Let the form submit normally
+});
+</script>
+    </body>
+    </html>

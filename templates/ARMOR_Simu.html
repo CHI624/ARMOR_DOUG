@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Website Name | Home</title>
+    
+    <!-- Google Fonts for aesthetics -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+
+    <!-- Your Custom Stylesheet -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header class="site-header">
+    <div class="header-content">
+        <a href ="{{ url_for('home') }}" class="logo">
+            <img src="{{ url_for('static', filename='DOD logo.png') }}" alt="CMMD Logo" class="logo-icon">
+        <h1>ARMOR</h1>          
+        </a><br><h1>|</h1><br>
+        <a href ="{{ url_for('ETI_HOME') }}" class="logo">
+        <h1>ETI</h1>
+        </a>
+        <nav class="nav-menu">
+            <a href="{{ url_for('home') }}">Home</a>
+            <a href="{{ url_for('CMMD_risk_choice') }}">ARMOR</a>
+            <a href="{{ url_for('ARMOR_QUER') }}">ARMOR ANALYSIS</a>
+            <a href="{{ url_for('ARMOR_QUER_RESEARCH') }}">ARMOR ANALYSIS(RESEARCHER)</a>
+            <a href="{{ url_for('about') }}">About</a>
+            <a href="{{ url_for('projects') }}">Projects</a>
+            </nav>
+    </div>
+</header>   <!-- Preloader -->
+<main class="hero-container">
+        <div class="text-container_simu">
+            <div class="text-content">
+                <h1>ARMOR</h1>
+                <div class="image-container_simu">
+                <img src="{{ url_for('static', filename='ai_ml vector.png') }}"
+                     alt="Soilders Running" loading="lazy" class="hero-image">
+                </div>
+                <h3>Summary:</h3>
+                <p>
+                    Adaptive Reasoning for Mitigation of Operational Risk (ARMOR) is a reasoning module 
+                    for identifying, assessing and providing recommendations for hazards. 
+                <br><br>
+            </div>
+        </div>
+        <style>
+                    body {
+    background-image: url("{{ url_for('static', filename='CMMD_wall_home.png') }}");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+            .text-containerciv h1{
+    flex: 1; 
+    display: flex;
+    top: 20px;
+    margin-top: 350px;
+    justify-content: center;
+    align-items: center;
+    padding: 0rem;
+}
+.text-containerciv h2{
+    flex: 1; 
+    display: flex;
+    top: 20px;
+    margin-bottom: 120px;
+    justify-content: center;
+    align-items: center;
+    padding: 0rem;
+}
+            .text-contentciv h1 {
+    font-family: 'Trebuchet MS', serif;
+    color: #ffffff;
+    max-width: 500px;
+    margin-left: 25px;
+    font-size: 30px;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: -50px;
+    flex: 1;
+}
+.text-contentciv h2 {
+    font-family: 'Trebuchet MS', serif;
+    color: #ffffff;
+    max-width: 500px;
+    font-size: 30px;
+    margin-right: 120px;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 5px;
+    flex: 1;
+}
+.button-containerciv {
+    width: 600px;
+    right: 9px;
+    position: relative;
+    top: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.button-containerciv1 {
+    width: 600px;
+    right: 20px;
+    position: relative;
+    top: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+        </style>
+        <div class="text-containerciv">
+            <div class="text-contentciv">
+                <h1>RESEARCHER/USER:</h1>
+                <div class ="button-containerciv">
+                <a href="{{ url_for('ARMOR_QUER_RESEARCH')}}" class="nav-button">ARMOR ANALYSIS(RESEARCHER)</a>
+                <a href="{{ url_for('ARMOR_QUER')}}" class="nav-button">ARMOR ANALYSIS(USER)</a>
+                </div>  
+
+                <h2>PERSONNEL:</h2>
+                <div class ="button-containerciv1">
+                <a href="{{ url_for('CMMD_risk_choice')}}" class="nav-button">ARMOR RISK MANAGEMENT</a>
+                </div>
+            </div>
+        </div>
+        </main>
+        </body>
+        </html>          

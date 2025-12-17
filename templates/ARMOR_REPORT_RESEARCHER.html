@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Website Name | Home</title>
+    
+    <!-- Google Fonts for aesthetics -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+
+    <!-- Your Custom Stylesheet -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header class="site-header">
+    <div class="header-content">
+        <a href ="{{ url_for('home') }}" class="logo">
+            <img src="{{ url_for('static', filename='DOD logo.png') }}" alt="CMMD Logo" class="logo-icon">
+        <h1>ARMOR</h1>          
+        </a><br><h1>|</h1><br>
+        <a href ="{{ url_for('ETI_HOME') }}" class="logo">
+        <h1>ETI</h1>
+        </a>
+        <nav class="nav-menu">
+            <a href="{{ url_for('home') }}">Home</a>
+            <a href="{{ url_for('CMMD_risk_choice') }}">ARMOR</a>
+            <a href="{{ url_for('ARMOR_QUER') }}">ARMOR ANALYSIS</a>
+            <a href="{{ url_for('ARMOR_QUER_RESEARCH') }}">ARMOR ANALYSIS(RESEARCHER)</a>
+            <a href="{{ url_for('about') }}">About</a>
+            <a href="{{ url_for('projects') }}">Projects</a>
+            </nav>
+    </div>
+</header>   <!-- Preloader -->
+<style>
+    /* Base reset and typography */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: 'Poppins', sans-serif;
+  background: #282828;
+  color: #333;
+  line-height: 1.5;
+}
+.nav-menu1 a {
+    margin-left: 2rem;
+    text-decoration: none;
+    font-family: 'Trebuchet MS', sans-serif;
+    color:rgb(205, 214, 25);
+    font-weight: 400;
+    transition: color 0.3s ease;
+}
+
+.nav-menu1 a:hover {
+    color: var(--accent-color);
+}
+/* Header */
+.site-header {
+  background: #1a1a1a;
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 6px rgb(225, 218, 11);
+}
+.site-header .header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.site-header .logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+.site-header .logo-icon {
+  height: 40px;
+  margin-right: 0.75rem;
+}
+.site-header h1 {
+  font-family: 'Playfair Display', serif;
+  color: #e1da0c;
+  font-size: 1.75rem;
+  padding: 0.5rem;
+}
+.next-button {
+  color: #ddd;
+  margin-left: 1.5rem;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+.next-button :hover {
+  color: #e1da0c;
+}
+
+/* Chat interface container */
+.chat-interface {
+  margin-top: 90px;
+  max-width: 800px;
+  margin: 2rem auto;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  padding: 1.5rem;
+}
+.chat-interface h2 {
+  font-family: 'Playfair Display', serif;
+  color: #1a1a1a;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+/* Chat box styling */
+.chat-box {
+  margin-top: 20px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  height: 400px;
+  padding: 1rem;
+  overflow-y: auto;
+  background:rgb(255, 255, 255);
+}
+.chat-box .message {
+  margin-bottom: 1rem;
+  display: flex;
+}
+main.chat-interface {
+  margin-top: 4rem;
+  background-color:rgb(163, 163, 163);
+}
+main.chat-interface h2{
+  color:rgb(255, 255, 255);
+}
+.chat-box .user,
+.chat-box .bot {
+  display: inline-block;
+  padding: 0.6rem 1rem;
+  border-radius: 18px;
+  max-width: 75%;
+  word-wrap: break-word;
+}
+
+.chat-box .user {
+  align-self: flex-end;
+  background:rgb(13, 163, 232);
+  color: #003c8f;
+  border-top-right-radius: 0;
+}
+.chat-box .bot {
+  align-self: flex-start;
+  background: #e8eaf6;
+  color: #1a237e;
+  border-top-left-radius: 0;
+}
+
+/* Utility */
+.hidden {
+  display: none !important;
+}
+#button {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 12px 24px;
+  background-color: #1e3a8a; /* Navy blue */
+  justify-items: center;
+  align-items: center;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  transition: background-color 0.3s ease;
+}
+
+#button:hover {
+  background-color: #3b82f6; /* Lighter blue on hover */
+}
+.center_container{
+    margin-top: -320px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        width: 100vw;
+}
+.save-pdf{
+    display: inline-block;
+  padding: 12px 24px;
+  background-color: #1e3a8a; /* Navy blue */
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  transition: background-color 0.3s ease;
+}
+.save-pdf:hover{
+  background-color: #3b82f6; /* Lighter blue on hover */
+
+}
+.button{
+  display: inline-block;
+  margin-top: 20px;
+  padding: 12px 24px;
+  background-color: #1e3a8a; /* Navy blue */
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  transition: background-color 0.3s ease;
+}
+.button:hover{
+  background-color: #3b82f6; /* Lighter blue on hover */
+}
+</style>
+<main class="chat-interface" id="report-content">
+  <h2>ARMOR Risk Report</h2>
+
+  <div style="background:rgb(117, 117, 117); color: #f0f0f0; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+    <p><strong>Severity Score:</strong> <?= htmlspecialchars($form1['severity_score']) ?></p>
+    <p><strong>Risk Score:</strong> <?= htmlspecialchars($form1['risk_score']) ?></p>
+    <p><strong>Final Risk Level:</strong> <?= htmlspecialchars($form1['final_risk']) ?></p>
+  </div>
+  <div id="chat-box" class="chat-box">
+    <h3>Model Outputs:</h3>
+
+<!--?php
+$modelChoices = $_SESSION['model_choices'] ?? [];
+$modelChoices1 =  $_SESSION['latest_control_recommendation'] ?? '';
+if (!empty($modelChoices['photo_model'])):
+?-->
+  <!-- ✅ Render Image -->
+  <div style="margin-bottom: 1rem;">
+    <h3>STEP 1:</h3>
+    <h4>Causal Graph</h4>
+    <img src="{{ url_for('static', filename='causal_graph5.png') }}" alt="Output Image" style="max-width:100%; border-radius: 8px;" />
+  </div>
+<!--?php endif; ?-->
+<!--?php if (!empty($_SESSION['causal_step2'])): ?-->
+  <!-- ✅ Render Image -->
+  <div style="margin-bottom: 1rem;">
+    <h3>STEP 2:</h3>
+    <h4>Hazard Connections Graph:</h4>
+    <img src="{{ url_for('static', filename='causal_graph_step2.png') }}" alt="Output Image" style="max-width:100%; border-radius: 8px;" />
+  </div>
+<div style="margin-bottom: 1rem;">
+  <h4>Risk Text:</h4>
+  <pre id="risk-text" style="white-space: pre-wrap; background:#f4f4f4; padding:1rem; border-radius: 6px;">Loading risk summary...</pre>
+</div>
+  <div style="margin-bottom: 1rem;">
+    <h4>Causal Output (Text):</h4>
+    <pre id="causal-output-text" style="white-space: pre-wrap; background:#f4f4f4; padding:1rem; border-radius: 6px;">Loading causal output...</pre>
+  </div>
+  <div style="margin-bottom: 1rem;">
+    <h3>STEP 3:</h3>
+    <h4>Recommended Controls:</h4>
+    <pre id="control-text" style="white-space: pre-wrap; background:#f4f4f4; padding:1rem; border-radius: 6px;">Loading control recommendations...</pre>
+  </div>
+
+    <!-- ✅ Render Text -->
+    <!-- ✅ Placeholder for severity output -->
+<!--?php if (!empty($modelChoices)): ?-->
+  <div style="margin-bottom: 1rem;">
+    <h4>CMMD Model Output:</h4>
+    <pre id="severity-output" style="white-space: pre-wrap; background:#f4f4f4; padding:1rem; border-radius: 6px;">
+      Loading severity analysis...
+    </pre>
+  </div>
+<!--?php endif; ?-->
+</div>
+</main>
+<div class="center_container">
+      <button id="save-pdf" class="save-pdf" style="margin-top: 1rem;">Download Report as PDF</button>
+      <br></br>
+      <a href="{{ url_for('thankyou') }}" id="next-button" class="button">SUBMIT</a>
+    </div>
+<script>
+const prompt = 0;//<?php echo json_encode($prompt); ?>;
+window.addEventListener('DOMContentLoaded', async () => {
+  const chatBox = document.getElementById('chat-box');
+  const nextButton = document.getElementById('next-button');
+  const imageContainer = document.getElementById('image-container');
+  const severityText = document.getElementById('severity-text');
+  let redirectURL = null; // Store redirect here
+  const riskTextEl = document.getElementById("risk-text");
+  const causalTextEl = document.getElementById("causal-output-text");
+  const controlTextEl = document.getElementById("control-text");
+
+  const riskSummaryUrl = "{{ url_for('static', filename='uploads/risk_summary_step2.txt') }}";
+  const severityFallbackUrl = "{{ url_for('static', filename='severity_result.txt') }}";
+  const causalOutputUrl = "{{ url_for('static', filename='uploads/step2_causal_output.txt') }}";
+  const controlOutputUrl = "{{ url_for('static', filename='uploads/control_recommendation.txt') }}";
+
+  const fetchText = async (url) => {
+    const resp = await fetch(url);
+    if (!resp.ok) throw new Error(`Missing file: ${url}`);
+    return resp.text();
+  };
+
+  try {
+    const txt = await fetchText(riskSummaryUrl);
+    riskTextEl.textContent = txt;
+  } catch (err) {
+    try {
+      const fallback = await fetchText(severityFallbackUrl);
+      riskTextEl.textContent = fallback;
+    } catch (fallbackErr) {
+      riskTextEl.textContent = "Error loading risk summary.";
+      console.error(err, fallbackErr);
+    }
+  }
+
+  try {
+    const causalTxt = await fetchText(causalOutputUrl);
+    causalTextEl.textContent = causalTxt;
+  } catch (err) {
+    causalTextEl.textContent = "No causal output available.";
+    console.error(err);
+  }
+
+  try {
+    const controlTxt = await fetchText(controlOutputUrl);
+    controlTextEl.textContent = controlTxt;
+  } catch (err) {
+    controlTextEl.textContent = "No control recommendations available.";
+    console.error(err);
+  }
+// Load and display severity text file
+(async () => {
+  const severityOutput = document.getElementById('severity-output');
+  try {
+    const response = await fetch("{{ url_for('static', filename='severity_analysis.txt') }}");
+    if (!response.ok) throw new Error('Could not load severity result');
+
+    const text = await response.text();
+    severityOutput.textContent = text;
+  } catch (err) {
+    severityOutput.textContent = '❌ Error loading severity analysis.';
+    console.error(err);
+  }
+})();
+document.getElementById('save-pdf').addEventListener('click', async () => {
+  const { jsPDF } = window.jspdf;
+  const reportElement = document.getElementById('report-content');
+  const chatBox = document.querySelector('.chat-box');
+
+  // Save original height and overflow
+  const originalHeight = chatBox.style.height;
+  const originalOverflow = chatBox.style.overflow;
+
+  try {
+    // Expand chatBox to show all content
+    chatBox.style.height = chatBox.scrollHeight + 'px';
+    chatBox.style.overflow = 'visible';
+
+    // Wait a bit for layout to update (optional)
+    await new Promise(r => setTimeout(r, 100));
+
+    const canvas = await html2canvas(reportElement, {
+      scale: 2,
+      useCORS: true,
+      scrollY: -window.scrollY
+    });
+
+    const imgData = canvas.toDataURL('image/png');
+
+    const pdf = new jsPDF('p', 'pt', 'a4');
+    const pageWidth = pdf.internal.pageSize.getWidth();
+    const pageHeight = pdf.internal.pageSize.getHeight();
+
+    const imgWidth = canvas.width;
+    const imgHeight = canvas.height;
+
+    const ratio = Math.min(pageWidth / imgWidth, pageHeight / imgHeight);
+    const pdfWidth = imgWidth * ratio;
+    const pdfHeight = imgHeight * ratio;
+
+    const marginX = (pageWidth - pdfWidth) / 2;
+    const marginY = 20;
+
+    pdf.addImage(imgData, 'PNG', marginX, marginY, pdfWidth, pdfHeight);
+    pdf.save('ARMOR_Risk_Report.pdf');
+  } catch (err) {
+    console.error('❌ PDF generation error:', err);
+    alert('Failed to generate PDF. Please try again.');
+  } finally {
+    // Restore original styles
+    chatBox.style.height = originalHeight;
+    chatBox.style.overflow = originalOverflow;
+  }
+});
+  const addMessage = (sender, text) => {
+    const msg = document.createElement('div');
+    msg.className = 'message';
+    msg.innerHTML = `<span class="${sender === 'You' ? 'user' : 'bot'}">${sender}:</span> ${text}`;
+    chatBox.appendChild(msg);
+    chatBox.scrollTop = chatBox.scrollHeight;
+  };
+  // Disable buttons during model output
+  document.getElementById('save-pdf').disabled = true;
+  document.getElementById('save-pdf').style.opacity = '0.5';
+  document.getElementById('next-button').disabled = true;
+  document.getElementById('next-button').style.opacity = '0.5';
+  addMessage('ARMOR', 'Analyzing your mission data...');
+
+  const response = await fetch('{{ url_for("llm_proxy") }}', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ prompt })
+  });
+
+  const data = await response.json();
+  const reply = data.reply || 'No response received.';
+  const formattedReply = (reply || 'No response received.').replace(/\n/g, '<br/>');
+  addMessage('ARMOR', formattedReply);
+  // ✅ Re-enable buttons after model finishes
+  document.getElementById('save-pdf').disabled = false;
+  document.getElementById('save-pdf').style.opacity = '1';
+  document.getElementById('next-button').disabled = false;
+  document.getElementById('next-button').style.opacity = '1';
+
+// ✅ Submit to DB ONLY when NEXT is clicked
+  try {
+      const dbResponse = await fetch('ARMOR_COND_RESEARCHER.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ response: reply })
+      });
+
+      const dbData = await dbResponse.json();
+
+      if (dbData.status === 'success' && dbData.redirect) {
+        window.location.href = dbData.redirect;
+      } else {
+        console.error('DB submission failed or redirect missing:', dbData);
+        alert('Something went wrong while saving. Please try again.');
+      }
+    } catch (error) {
+      //console.error('Error sending data:', error);
+      //alert('Failed to submit. Please check your connection or try again.');
+    }  
+});
+</script>
+</body>
+</html>

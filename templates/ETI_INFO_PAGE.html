@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ARMOR | Home</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400&display=swap" rel="stylesheet"/>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      height: 100%;
+      font-family: 'Poppins', sans-serif;
+      scroll-behavior: smooth;
+      z-index: 1;
+    }
+    /* INTRO SECTION */
+    .intro {
+    
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      max-height: 23vh;
+      background-image:url("{{ url_for('static', filename='gradient-liquid.jpg')}}");
+      color: white;
+      text-align: center;
+      position: relative;
+      transition: opacity 5s ease, transform 5s ease;
+      box-shadow:rgba(0, 0, 0, 0.5) 0px 10px 30px;
+      margin-top: -73px;
+      margin-bottom: 70px;
+      z-index:-10;
+    }
+
+
+    .intro h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 30px;
+      margin-bottom: 0.5rem;
+      opacity: 0;
+      animation: fadeIn 2s 1.5s forwards;
+      z-index: 1;
+    }
+
+    .intro p {
+      font-size: 15px;
+      opacity: 0;
+      animation: fadeIn 2s 1.5s forwards;
+    }
+    .intro video{
+      opacity: 13;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: translate(-50%, -50%);
+      z-index: -1;
+    }
+    .intro .intro-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.706); /* Adjust opacity as needed */
+  z-index: -1;
+}
+.intro.fade-out {
+      opacity: 0;
+  transform: translateY(-50px);
+  pointer-events: none;
+  position: absolute;
+  height: 0;
+  overflow: hidden;
+    }
+    .down-arrow {
+      margin-top: 2rem;
+      font-size: 2rem;
+      cursor: pointer;
+      opacity: 0;
+      animation: fadeIn 2s 2s forwards;
+      transition: transform 0.3s;
+    }
+
+    .down-arrow:hover {
+      transform: translateY(5px);
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    /* FIXED HEADER */
+    .site-header {
+      opacity: 1;
+      transform: translateY(-30px);
+      transition: opacity 1s ease, transform 1s ease;
+      background: linear-gradient(135deg,#004a99,#007aff);
+      box-shadow: rgba(0, 0, 0, 0.5) 0px 10px 30px;
+      color: #fff;
+      clip-path: polygon(0 0,100% 0,100% 75%,0 100%);
+      width: 100%;
+      z-index: 999;
+    }
+
+    .site-header.visible {
+      opacity: 1;
+      transform: translateY(0);
+      position: fixed;
+      top: 0;
+      left: 0;
+    }
+
+    .site-header .header-content {
+      max-width: 1200px; margin: auto; padding: 2rem;
+      display: flex; align-items:center; justify-content:space-between;
+    }
+
+    .site-header .logo {
+      display:flex; align-items:center; text-decoration:none; color:#fff;
+    }
+
+    .site-header .logo-icon { height:50px; margin-right:1rem; }
+
+    .site-header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size:2.5rem; letter-spacing:2px;
+    }
+
+    .site-header .nav-menu a {
+      margin-left:1.5rem; text-decoration:none; color:#fff;
+      font-weight:500; position:relative;
+    }
+
+    .site-header .nav-menu a::after {
+      content:''; display:block; height:2px; background:#fff;
+      width:0; transition:width .3s;
+      position:absolute; bottom:-4px; left:0;
+    }
+
+    .site-header .nav-menu a:hover::after { width:100%; }
+
+    /* Spacer to avoid header overlap */
+    .header-spacer {
+      height: 130px;
+      display: none;
+    }
+.site-header.static {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.scroll-down-arrow {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    margin-top: 20px;
+    height: 40px;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    animation: bounce 2s infinite ease-in-out;
+    z-index: 1;
+}
+
+.scroll-down-arrow svg {
+    stroke: #fff;
+    transition: stroke 0.3s ease;
+        z-index: 1;
+
+}
+
+.scroll-down-arrow:hover {
+    background-color: var(--primary-text-color);
+    border-color: var(--primary-text-color);
+    animation-play-state: paused; /* Pause animation on hover */
+        z-index: 1;
+
+}
+
+.scroll-down-arrow:hover svg {
+    stroke: var(--background-color);
+        z-index: 1;
+}
+.scroll-down-arrow1 {
+    position: absolute;
+    margin-top: 640px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 40px;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    animation: bounce 2s infinite ease-in-out;
+    z-index: 2;
+
+}
+
+.scroll-down-arrow1 svg {
+    stroke: #fff;
+    transition: stroke 0.3s ease;
+        z-index: 2;
+
+}
+
+.scroll-down-arrow1:hover {
+    background-color: var(--primary-text-color);
+    border-color: var(--primary-text-color);
+    animation-play-state: paused; /* Pause animation on hover */
+        z-index: 2;
+
+}
+
+.scroll-down-arrow1:hover svg {
+    stroke: var(--background-color);
+        z-index: 2;
+}
+.scroll-down-arrow1.fade-in {
+  opacity: 1;
+  pointer-events: auto;
+  transition: opacity 1s ease;
+  z-index: 1;
+}
+.scroll-down-arrow.fade-in {
+  opacity: 1;
+  pointer-events: auto;
+  transition: opacity 1s ease;
+  z-index: 1;
+}
+
+.intro.locked {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  z-index: 10;
+  overflow: hidden;
+}
+body.lock-scroll {
+  overflow: hidden;
+}
+.scroll-up-arrow {
+  position: absolute;
+  bottom: 30px;
+  width: 40px;
+  height: 40px;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+  animation: bounce 2s infinite ease-in-out;
+  z-index: 9;
+}
+
+.scroll-up-arrow svg {
+  stroke: #fff;
+  transition: stroke 0.3s ease;
+}
+
+.scroll-up-arrow:hover {
+  background-color: var(--primary-text-color);
+  border-color: var(--primary-text-color);
+  animation-play-state: paused;
+}
+
+.scroll-up-arrow:hover svg {
+  stroke: var(--background-color);
+}
+    .intro {
+      position: relative;
+      height: 80vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .intro video {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      min-width: 100%;
+      min-height: 100%;
+      transform: translate(-50%, -50%);
+      object-fit: cover;
+      z-index: -2;
+    }
+
+    .intro-overlay {
+      position: absolute;
+      background: rgba(0, 0, 0, 0.6);
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    .intro-text h1 {
+      font-size: 30px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      top: 1.5rem;
+    }
+
+    .info-section {
+    
+      background: #f9f9f9;
+      padding: 3rem 2rem;
+    }
+
+    .info-container {
+      display: flex;
+      flex-wrap: wrap;
+      max-width: 1000px;
+      margin: auto;
+      gap: 2rem;
+    }
+
+    .info-text {        
+        margin-top: 50px;
+      flex: 1 1 55%;
+      font-size: 1.1rem;
+      font: "Trebuchet MS", sans-serif, bold;
+      color: #333;
+    }
+    .info-text h2{
+      flex: 1 1 55%;
+      font-size: 43px;
+      margin-bottom: 10px;
+      font: "Futura", sans-serif, bold;
+      color: #333;
+    }
+    .info-text p{
+      flex: 1 1 55%;
+      font-size: 25px;
+      margin-bottom: 5px;
+      font: "Trebuchet MS", sans-serif, bold;
+      color: #333;
+    }
+    .input-form {
+      flex: 1 1 40%;
+      background: white;
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .input-form h3 {
+      margin-bottom: 1rem;
+      color: #004a99;
+    }
+
+    .input-form label {
+      display: block;
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+
+    .input-form textarea,
+    .input-form input[type="file"] {
+      width: 100%;
+      margin-top: 0.5rem;
+    }
+
+    .input-form textarea {
+      padding: 0.75rem;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    .input-form button {
+      margin-top: 1.5rem;
+      background: #007aff;
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .input-form button:hover {
+      background: #005bb5;
+    }
+
+    @media (max-width: 768px) {
+      .info-container {
+        flex-direction: column;
+      }
+    }
+.photo-container {
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+  position: relative;
+  width: 100%; /* Or set a specific width */
+  max-width: 500px; /* Example to control the image size */
+}
+
+.logo-image {
+  width: 100%;
+  max-width: 300px; /* Example: set a max-width for the image */
+  height: auto;
+  display: block;
+  border-radius: 10px;
+}
+
+.p_header {
+  position: absolute;
+  margin-top: 73%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Centers the text perfectly */
+  color:rgb(0, 48, 100); /* Example: make the text color stand out */
+  text-align: center;
+  font-size: 2em; /* Example: adjust font size */
+}
+.photo-and-header-container {
+margin-top: 50px;
+  flex-shrink: 0; /* Prevents the image container from shrinking */
+  text-align: center;
+}
+.photo-and-header-container h1{
+    font-size: 2.5em;
+    color: rgb(255, 255, 255);
+    font-family: 'Playfair Display', serif;
+}
+.scroll-down-arrow {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    top: 450px;
+    height: 40px;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    animation: bounce 2s infinite ease-in-out;
+    z-index: 1;
+}
+
+.scroll-down-arrow svg {
+    stroke: #fff;
+    transition: stroke 0.3s ease;
+        z-index: 1;
+
+}
+
+.scroll-down-arrow:hover {
+    background-color: var(--primary-text-color);
+    border-color: var(--primary-text-color);
+    animation-play-state: paused; /* Pause animation on hover */
+        z-index: 1;
+
+}
+
+.scroll-down-arrow:hover svg {
+    stroke: var(--background-color);
+        z-index: 1;
+}
+.scroll-down-arrow1 {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    top: 50px;
+    height: 40px;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    animation: bounce 2s infinite ease-in-out;
+    z-index: 10;
+}
+
+.scroll-down-arrow1 svg {
+    stroke: #fff;
+    transition: stroke 0.3s ease;
+        z-index: 1;
+
+}
+
+.scroll-down-arrow1:hover {
+    background-color: var(--primary-text-color);
+    border-color: var(--primary-text-color);
+    animation-play-state: paused; /* Pause animation on hover */
+        z-index: 1;
+
+}
+
+.scroll-down-arrow1:hover svg {
+    stroke: var(--background-color);
+        z-index: 1;
+}
+.info-section {
+    bottom: 75px;
+  background-image: url("{{ url_for('static', filename='photo-1579548122080-c35fd6820ecb.jpeg')}}");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  min-height: 69vh;
+  z-index: 1;
+  /* Optional: Add a background overlay for better text readability */
+  position: relative;
+}
+
+/* Optional: Overlay to darken the background image and make text pop */
+.info-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* 50% opacity black */
+  z-index: -1; /* Puts the overlay behind the content */
+}
+
+/* Make sure your text is visible */
+.info-section h2,
+.info-section p {
+  color: white;
+}
+.current-section{
+        bottom: 79px;
+  background-image: url("{{ url_for('static', filename='matr.webp') }}");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  min-height: 110vh;
+  z-index: 1;
+  /* Optional: Add a background overlay for better text readability */
+  position: relative;
+}
+.future-section{
+  margin-top: -79px;
+  background-image: url("{{ url_for('static', filename='gradient-connection-background_23-2150462050.avif')}}");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  min-height: 110vh;
+  z-index: 1;
+  overflow-y: hidden;
+  /* Optional: Add a background overlay for better text readability */
+  position: relative;
+}
+.current-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem; /* Adds some space between the text and the video */
+  max-width: 1200px; /* Optional: Sets a max-width for the content */
+  margin: 0 auto; /* Optional: Centers the content container */
+}
+.future-content{
+  justify-content: center;
+  align-items: center;
+  margin-top: 183px;
+  gap: 2rem; /* Adds some space between the text and the video */
+  max-width: 1200px; /* Optional: Sets a max-width for the content */
+  margin: 0 auto; /* Optional: Centers the content container */
+}
+
+.current-text {  
+margin-top: 183px;
+margin-left: 15px;
+  flex: 1; /* Allows the text div to grow and take up available space */
+  /* You may want to add some padding here for spacing */
+}
+    .current-text h2{
+      flex: 1 1 55%;
+      font-size: 43px;
+      margin-bottom: 10px;
+      font: "Futura", sans-serif, bold;
+      color: #fff;
+    }
+    .current-text p{
+      flex: 1 1 55%;
+      font-size: 21px;
+      margin-bottom: 10px;
+      font: "Trebuchet MS", sans-serif, bold;
+      color: #fff;
+    }
+    .future-text{
+        top: 400px;
+        justify-content: center;
+        text-align: center;
+        color: #fff;
+        flex: 1;
+        position: relative;
+    }
+    .future-text h2{
+        flex: 1 1 55%;
+        font-size: 43px;
+        margin-bottom: 10px;
+        font: "Futura", sans-serif, bold;
+        color: #fff;
+    }
+    .future-text p{
+        flex: 1 1 55%;
+        font-size: 21px;
+        margin-bottom: 10px;
+        font: "Trebuchet MS", sans-serif, bold;
+        color: #fff;
+    }
+.eti-btn{
+    padding: 0.7rem 1.2rem;
+    font-size: 1rem;
+    background-color:rgb(27, 129, 239);
+    border: none;
+    color: rgb(255, 255, 255);
+    top: 430px;
+    left: 44.5%;
+    position: relative;
+    justify-items: center;
+    text-align: center;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.eti-btn:hover{
+    background-color:#004a99
+}
+.Video_Content {
+  flex-shrink: 0; /* Prevents the video from shrinking */
+  width: 50%; /* Optional: Sets a specific width for the video container */
+  max-width: 600px; /* Optional: Sets a maximum width for the video */
+}
+
+/* Optional: Make the video responsive */
+.Video_Content video {
+    margin-top: 183px;
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 10px;
+  border:#fff 2px solid;
+  box-shadow: rgba(0, 0, 0, 0.5) 0px 10px 30px;
+}
+#main-content-wrapper {    
+    overflow: hidden;
+    /* Transition multiple properties for a more dynamic effect */
+    transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+    background-color: transparent; /* Default background is transparent */
+
+}
+#main-content-wrapper.fade-out {
+    opacity: 0;
+    /* Zoom out effect: Scales the entire content down to 50% */
+    transform: scale(700%);
+    background-color: black;
+
+    /* For a zoom-in effect instead, you would use a value greater than 1, like scale(1.1) */
+}
+  </style>
+</head>
+<body>
+<div id = "main-content-wrapper">
+  <!-- Final Header (initially hidden) -->
+  <header id="finalHeader" class="site-header">
+    <div class="header-content">
+      <a href="{{ url_for('ETI_INFO_PAGE')}}" class="logo">
+        <img src="{{ url_for('static', filename='DOD logo.png')}}" alt="CMMD Logo" class="logo-icon">
+        <h1>ETI(Enhanced Technical Inferencing)</h1>
+      </a>
+      <nav class="nav-menu">
+        <a href="{{ url_for('ARMOR_HOME')}}">Home</a>
+        <a href="{{ url_for('home')}}">ARMOR</a>
+        <a href="http://127.0.0.1:5000">CMMD</a>        
+        <a href="http://127.0.0.1:8051/">C^2ORES</a>
+        <a href="{{ url_for('ETI_INFO_PAGE')}}">ETI HOME</a>
+        <a href="{{ url_for('about')}}">About</a>
+      </nav>
+    </div>
+  </header>
+ <!-- Background Intro Section -->
+  <section class="intro">
+    <video autoplay muted loop>
+      <source src="{{ url_for('static', filename='intro.mp4')}}" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+    <div class="intro-overlay"></div>
+    <div class="intro-text">
+      <h1>Welcome to ETI</h1>
+      <p>Your gateway to advanced risk management and analysis.</p>
+    </div>
+  </section>
+
+  <!-- Informational + Input Section -->
+  <section class="info-section" id="intro-section">
+    <div class="info-container">
+      <div class="info-text">
+        <h2>ETI Overview:</h2>
+       
+        <p>
+          o Framework for artificial reasoning research and
+            experimentation
+</p>
+<p>
+          o Provides access to reasoning modules for demonstrating basic
+            research projects
+</p>
+<p>
+          o Provides access to reasoning modules for data collection and
+            experimentation as use case prototypes
+        </p>
+      </div>
+    <div class="photo-and-header-container"> 
+  <h1>ETI</h1 style="top: 20px;">
+  <img src="{{ url_for('static', filename='ETI Logo.png')}}" alt="ETI Logo" class="logo-image">
+</div>
+    <a id="scroll-down-arrow" href="#current-section" class="scroll-down-arrow" aria-label="Scroll to next section">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="6 9 12 15 18 9"></polyline>
+  </svg>
+</a>
+</div>
+</section>
+<section class="current-section" id="current-section">
+  <div class="overlay"></div>
+  <div class="current-content"> 
+    <div class ="current-text">   
+    <h2>Current Modules:</h2>
+            <p>
+          o Activity Reasoning Module – demonstrating identification of
+            uncertainty of information across multiple time series data
+</p>
+<p>
+          o Causal Multimodal Data (CMMD) – causally based
+            classification of imagery and text data for supporting natural
+            disaster tasks
+</p>
+<p>
+          o Adaptive Reasoning for Mitigating Operation Risks (ARMOR) –
+            leverages large language models and causal graphs for
+            supporting risk management
+        </p>
+        <p>
+          o Clarifying Causal Core Significance (C^3ORES) – enhanced
+            causal object detection
+        </p>
+    </div>
+            <div class ="Video_Content">
+        <video autoplay muted loop>
+            <source src="{{ url_for('static', filename='ETI_ATAK.mp4')}}" type="video/mp4" />
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    <a id="scroll-down-arrow1" href="#future-section" class="scroll-down-arrow1" aria-label="Scroll to next section">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="6 9 12 15 18 9"></polyline>
+  </svg>
+</a>
+</div>
+</section>
+<section class="future-section" id="future-section">
+  <div class="overlay"></div>
+  <div class="future-content">  
+    <div class="future-text">  
+    <h2>Future Modules:</h2>
+            <p>
+          o Constrained Causal Decision Dilemma (C2D2)
+</p>
+<p>
+          o Research on Causal Casualty Outcomes and Vulnerabilities
+using Reasoning (REC 2 OVR)
+</p>
+<p>
+          o Dynamic Knowledge Augmented Graph Grounded Entity
+Reasoning (DAGGER)
+        </p>
+</div>
+<button type="button" id="eti-btn" class="eti-btn" href="{{ url_for('ARMOR_HOME')}}">STEP INTO ETI</button>
+</div>
+</section>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Find the first section element by its new ID
+  const firstSection = document.getElementById('finalHeader');
+
+  // Scroll to that element when the page loads
+  if (firstSection) {
+    firstSection.scrollIntoView({
+      behavior: 'smooth', // This makes the scroll animated
+      block: 'start'      // This aligns the top of the element to the top of the viewport
+    });
+  }
+  
+  const button = document.querySelector('.eti-btn');
+  const contentWrapper = document.getElementById('main-content-wrapper');
+
+  button.addEventListener('click', function() {
+    // 1. Add the fade-out class to the content wrapper
+    contentWrapper.classList.add('fade-out');
+
+    // 2. Wait for the transition to finish
+    // The `transitionend` event fires when a CSS transition completes.
+    contentWrapper.addEventListener('transitionend', function() {
+      // 3. Navigate to the new page after the fade-out is complete
+      window.location.href = "{{ url_for('ARMOR_HOME')}}";
+    });
+  });
+});
+</script>
+</body>

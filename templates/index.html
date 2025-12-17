@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Website Name | Home</title>
+    
+    <!-- Google Fonts for aesthetics -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+
+    <!-- Your Custom Stylesheet -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header class="site-header">
+    <div class="header-content">
+        <a href ="{{ url_for('home') }}" class="logo">
+            <img src="{{ url_for('static', filename='DOD logo.png') }}" alt="CMMD Logo" class="logo-icon">
+        <h1>ARMOR</h1>          
+        </a><br><h1>|</h1><br>
+        <a href ="{{ url_for('ETI_HOME') }}" class="logo">
+        <h1>ETI</h1>
+        </a>
+        <nav class="nav-menu">
+            <a href="{{ url_for('home') }}">Home</a>
+            <a href="{{ url_for('CMMD_risk_choice') }}">ARMOR</a>
+            <a href="{{ url_for('ARMOR_QUER') }}">ARMOR ANALYSIS</a>
+            <a href="{{ url_for('ARMOR_QUER_RESEARCH') }}">ARMOR ANALYSIS(RESEARCHER)</a>
+            <a href="{{ url_for('about') }}">About</a>
+            <a href="{{ url_for('projects') }}">Projects</a>
+            </nav>
+    </div>
+</header>   <!-- Preloader -->
+<section id="hero-container">
+    <main class="hero-container">
+
+        <div class="image-container">
+            <img src="{{ url_for('static', filename='ARMOR_HOME_Photo.jpg') }}"
+                 alt="Soilders Running" loading="lazy" class="hero-image">
+        </div>
+<style>
+    .text-content{
+        margin-bottom: 145px;
+    }
+</style>
+        <div class="text-container">
+            <div class="text-content">
+                <h1>ARMOR</h1>
+                        <br><br>
+                <p>
+                    Adaptive Reasoning for Mitigation of Operational Risk (ARMOR) is a reasoning module 
+                    for identifying, assessing and providing recommendations for hazards. 
+                    <br><br>
+                </p>
+            </div>
+        </div>
+
+        <!-- === HIGHLIGHTED ARROW === -->
+        <a href="#next-section" class="scroll-down-arrow" aria-label="Scroll to next section">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+        </a>
+
+    </main>
+</section>
+    <!-- This is a dummy section for the arrow to scroll to -->
+    <section id="next-section" style="height: 100vh; display: grid; place-content: center; ">
+        <main class="hero-container">
+
+        <div class="text-container">
+            <div class="text-content">
+                
+                <h2>Current Challenge</h2>
+                <p>
+                    Army Personnel typically go into a military situation with many unknwown variables, these variables can range anywhere from unforseen enviormental factors, hidden obstacles and limited knowledge on the adversary intentions.
+                    <br><br>
+                </p>
+                        
+            </div>
+        </div>
+        <div class="image-container1">
+                    <img src="{{ url_for('static', filename='ARMOR_HOME_Photo1.jpg') }}"
+
+                 alt="Sniper Soilder" loading="lazy" class="hero-image">
+                </div>
+        <a href="#next-section1" class="scroll-down-arrow" aria-label="Scroll to next section">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+            
+        </a>
+    </main>
+    </section>
+    <style>
+        body {
+    background-image: url("{{ url_for('static', filename='CMMD_wall_home.png') }}");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+        .image-container_fir{
+            margin-top: 370px;
+        }
+        .text_container_fir{
+            top: 200px;
+        }
+        .scroll-down-arrow{
+            margin-bottom: 20px;
+        }
+        .scroll-up-arrow {
+  position: relative;
+  bottom: 30px;
+  margin: auto;
+  margin-left: auto;
+  left: 15px;
+  width: 40px;
+  height: 40px;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+  animation: bounce 2s infinite ease-in-out;
+  z-index: 9;
+}
+
+.scroll-up-arrow svg {
+  stroke: #fff;
+  transition: stroke 0.3s ease;
+}
+
+.scroll-up-arrow:hover {
+  background-color: var(--primary-text-color);
+  border-color: var(--primary-text-color);
+  animation-play-state: paused;
+}
+
+.scroll-up-arrow:hover svg {
+  stroke: var(--background-color);
+}
+    </style>
+    <section id="next-section1" style="height: 100vh; display: grid; place-content: center; ">
+        <main class="hero-container">
+        <div class="image-container_fir">
+              <a href="{{ url_for('static', filename='Screen Shot 2017-08-12 at 12.54.15 PM.png') }}" target="_blank">
+                    <img src="{{ url_for('static', filename='Screen Shot 2017-08-12 at 12.54.15 PM.png') }}"
+                 alt="Sniper Soilder" loading="lazy" class="hero-image">
+                </a>
+                <a href="{{ url_for('static', filename='operation-fulminate-after-action-report-template-aar-v0-5iw5fmzs9ubb1.jpg') }}" target="_blank">
+                    
+                 <img src="{{ url_for('static', filename='operation-fulminate-after-action-report-template-aar-v0-5iw5fmzs9ubb1.jpg') }}"
+                 alt="Sniper Soilder" loading="lazy" class="hero-image">
+                </a>
+                <h4>Example Risk Assesment and After Action Reports</h4>
+                <a href="{{ url_for('ARMOR_Simu') }}" class="nav-button">ARMOR</a>
+                </div>
+            
+
+        <div class="text-container_fir">
+            <div class="text-content_fir">
+                
+                <h2>Current Approach</h2>
+                <br><br>
+                <p>
+                    Currently Army Personnel uses standard reports and documents to perform multiple steps in the risk management
+                    process.
+                    <br><br>
+                </p>
+                <h2>ARMOR Approach</h2>
+                <br><br>
+                <p>
+                    To leverage reasoning modules to assist in the steps within the risk management process.
+                    <br><br>
+                </p>
+                        
+            </div>
+        </div>
+        
+    </main><a id="scroll-up-arrow" href="#hero-container" class="scroll-up-arrow" aria-label="Scroll to top">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="18 15 12 9 6 15"></polyline>
+  </svg>
+</a>
+    </section>
+    <!-- Your Custom JavaScript -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>

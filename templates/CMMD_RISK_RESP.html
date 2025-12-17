@@ -1,0 +1,234 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Website Name | Home</title>
+    
+    <!-- Google Fonts for aesthetics -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+
+    <!-- Your Custom Stylesheet -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header class="site-header">
+    <div class="header-content">
+        <a href ="{{ url_for('home') }}" class="logo">
+            <img src="{{ url_for('static', filename='DOD logo.png') }}" alt="CMMD Logo" class="logo-icon">
+        <h1>ARMOR</h1>          
+        </a><br><h1>|</h1><br>
+        <a href ="{{ url_for('ETI_HOME') }}" class="logo">
+        <h1>ETI</h1>
+        </a>
+        <nav class="nav-menu">
+            <a href="{{ url_for('home') }}">Home</a>
+            <a href="{{ url_for('CMMD_risk_choice') }}">ARMOR</a>
+            <a href="{{ url_for('ARMOR_QUER') }}">ARMOR ANALYSIS</a>
+            <a href="{{ url_for('ARMOR_QUER_RESEARCH') }}">ARMOR ANALYSIS(RESEARCHER)</a>
+            <a href="{{ url_for('about') }}">About</a>
+            <a href="{{ url_for('projects') }}">Projects</a>
+            </nav>
+    </div>
+</header>   <!-- Preloader -->
+  <style>
+        * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: #121212;
+    }
+    .header-content h1{
+        font-family: 'Trebuchet MS', serif;
+  color: #e1da0c;
+  font-size: 1.75rem;  
+  justify-items:auto;
+    }
+    
+    header.site-header {
+        background: #1a1a1a;
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 6px rgb(225, 218, 11);
+    }
+
+    header .logo {
+      display: flex;
+      align-items: center;
+      color: #e1da0c;
+      text-decoration: none;
+    }
+    .flex-container{
+        display: flex;
+    }
+
+    header .logo img {
+      height: 40px;
+    }
+
+    nav.nav-menu a {
+      margin-left: 1rem;
+      color: white;
+      text-decoration: none;
+    }
+    .nav-menu1 a {
+    margin-left: 2rem;
+    text-decoration: none;
+    font-family: 'Trebuchet MS', sans-serif;
+    color:rgb(205, 214, 25);
+    font-weight: 400;
+    transition: color 0.3s ease;
+}
+
+.nav-menu1 a:hover {
+    color: var(--accent-color);
+}
+    .chat-interface {
+      max-width: 800px;
+      margin: 3rem auto;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      padding: 1rem;
+      border-radius: 8px;
+      background-color: #282828;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .chat-box {
+      border: 1px solid #ddd;
+      padding: 1rem;
+      height: auto;
+      background: #f5f8fa;
+      border-radius: 6px;
+      margin-bottom: 1rem;
+    }
+
+    .message {
+      margin-bottom: 1rem;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .bot {
+      align-self: flex-start;
+      background-color: #e8eaf6;
+      color: #1a237e;
+      padding: 0.6rem 1rem;
+      border-radius: 18px 18px 18px 0;
+      max-width: 75%;
+      word-wrap: break-word;
+    }
+
+    h2 {
+      color: #e1da0c;
+      font-family: "Trebuchet MS", sans-serif;
+      font-size: 30px;
+      margin-bottom: 13px;
+    }
+
+    label {
+      color:rgb(0, 0, 0);
+      font-family: "Trebuchet MS", sans-serif, bold;
+      font-size: 25px;
+      margin-bottom: 0px;
+    }
+  button{
+        padding: 0.7rem 1.2rem;
+  font-size: 1rem;
+  background-color:rgb(27, 129, 239);
+  border: none;
+  color: rgb(0, 0, 0);
+  top: 30px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+    }
+button:hover{
+      background-color: #0056b3;
+    }
+      /* Header */
+.site-header {
+  background: #1a1a1a;
+  padding: 1rem;
+  box-shadow: 0 2px 6px rgb(225, 218, 11);
+}
+.site-header .header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.site-header .logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+.site-header .logo-icon {
+  height: 40px;
+  margin-right: 0.75rem;
+}
+.site-header h1 {
+  font-family: 'Playfair Display', serif;
+  color: #e1da0c;
+  font-size: 1.75rem;
+  padding: 0.5rem 0;
+}
+.nav-menu1 a {
+    margin-left: 2rem;
+    text-decoration: none;
+    font-family: 'Trebuchet MS', sans-serif;
+    color:rgb(205, 214, 25);
+    font-weight: 400;
+    transition: color 0.3s ease;
+}
+
+.nav-menu1 a:hover {
+    color: #0056b3;
+}
+  </style>
+  <main class="chat-interface">
+    <h2>ARMOR RISK SUMMARY</h2>
+    <div id="chat-box" class="chat-box">
+      <div class="message bot"><strong>Severity Score(s):</strong> {{ SEVERITY_SCORE }}</div>
+      <div class="message bot"><strong>Probability Score(s):</strong> {{ RISK_SCORE }}</div>
+      <div class="message bot"><strong>Single Probability Score(s):</strong> {{ SINGLE_RISK_SCORE }}</div>
+      <div class="message bot"><strong>Final Risk Level:</strong> {{ FINAL_RISK_LEVEL }}</div>
+        <div class="message bot"><strong>CMMD SCORE(S):</strong> {{CMMD_SCORE}}</div>
+    </div>
+    <a href="{{ url_for('thankyou')}}"><button id="button">NEXT</button></a>
+  </main>
+  <script>
+      // 4) Embed the PHP prompt into JS
+      //const prompt = <?php echo json_encode($fullPrompt); ?>;
+
+      window.addEventListener('DOMContentLoaded', async () => {
+        const chatBox = document.getElementById('chat-box');
+        const addMessage = (sender, text) => {
+          const msg = document.createElement('div');
+          msg.className = 'message bot';
+          msg.innerHTML = `<strong>${sender}:</strong> ${text}`;
+          chatBox.appendChild(msg);
+        };
+
+        addMessage('ARMOR', 'Analyzing historical controls and current risk...');
+
+        // 5) Send just the prompt in "response-only" mode
+        const res = await fetch('{{ url_for("llm_proxy") }}', {
+          method: 'POST',
+          headers: {'Content-Type':'application/json'},
+          body: JSON.stringify({ prompt, response_only: true })
+        });
+        const { reply } = await res.json();
+        // Format response as HTML with line breaks
+        const formattedReply = (reply || 'No response received.').replace(/\n/g, '<br/>');
+        addMessage('ARMOR', formattedReply);
+      });
+    </script>
+</body>
+</html>
